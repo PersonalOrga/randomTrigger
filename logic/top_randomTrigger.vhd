@@ -1,4 +1,4 @@
---!@file randomTrigger.vhd
+--!@file top_randomTrigger.vhd
 --!@brief generate pulse trigger with pseudocasual delay
 --!@details (iFREQ_DIV=iINT_BUSY hypothesys), f_avarage_trigger = (1/(SHAPER_T_ON*20*10^-9 + INT_BUSY*20*10^-9)) * ((2^32 - THRESHOLD)/2^32)
 --!@setup 
@@ -18,8 +18,8 @@ use work.paperoPackage.all;
 use work.basic_package.all;
 
 
---!@copydoc randomTrigger.vhd
-entity randomTrigger is
+--!@copydoc top_randomTrigger.vhd
+entity top_randomTrigger is
   port(
     iCLK            : in  std_logic;        --!Main clock
     iRST            : in  std_logic;        --!Main reset
@@ -38,11 +38,11 @@ entity randomTrigger is
     -- Output
     oTRIG           : out std_logic         --!Output trigger
     );
-end randomTrigger;
+end top_randomTrigger;
 
 
---!@copydoc randomTrigger.vhd
-architecture Behavior of randomTrigger is  
+--!@copydoc top_randomTrigger.vhd
+architecture Behavior of top_randomTrigger is  
   signal sPRBS32Out      : std_logic_vector(31 downto 0);   --!PRBS32 output
   signal sBusyCounter    : std_logic_vector(31 downto 0);   --!Counter for trigger pause
   signal sShaperCounter  : std_logic_vector(31 downto 0);   --!Counter for shaper
@@ -61,11 +61,11 @@ architecture Behavior of randomTrigger is
   
 begin
   --!Combinatorial assignments
-  sExt_Busy       <= '0';         --iEXT_BUSY;    -- Def '0'
-  sThreshold      <= "DDDDDDDD";  --iTHRESHOLD;   -- Def "DDDDDDDD"
-  sIntBusy        <= "0000C350";  --iINT_BUSY;    -- Def "0000C350"
-  sShaperTOn      <= "005F5E10";  --iSHAPER_T_ON; -- Def "005F5E10"
-  sFreqDiv        <= "C350";      --iFREQ_DIV;    -- Def "C350"  --> 1 Hz
+  sExt_Busy       <= '0';          --iEXT_BUSY;    -- Def '0'
+  sThreshold      <= x"DDDDDDDD";  --iTHRESHOLD;   -- Def "DDDDDDDD"
+  sIntBusy        <= x"0000C350";  --iINT_BUSY;    -- Def "0000C350"
+  sShaperTOn      <= x"005F5E10";  --iSHAPER_T_ON; -- Def "005F5E10"
+  sFreqDiv        <= x"C350";      --iFREQ_DIV;    -- Def "C350"  --> 1 Hz
   oTRIG           <= sTrig;
   sFreqDivRst     <= iRST or sFreqDivFlag;
   oLED            <= sLed;

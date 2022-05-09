@@ -7,7 +7,7 @@ end randomTrigger_tb;
 
 
 architecture Behavior of randomTrigger_tb is
-component randomTrigger is
+component top_randomTrigger is
   port(
     iCLK            : in  std_logic;        --!Main clock
     iRST            : in  std_logic;        --!Main reset
@@ -43,7 +43,7 @@ signal sTRIG          : std_logic;
 constant clk_period	  : time := 20 ns;			-- Definizione della costante "clk_period" di tipo "tempo".
 
 begin
-  uut : randomTrigger
+  uut : top_randomTrigger
   port map(
       iCLK            => sCLK,
       iRST            => sRST,
