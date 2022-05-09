@@ -64,7 +64,7 @@ begin
   sExt_Busy       <= '0';          --iEXT_BUSY;    -- Def '0'
   sThreshold      <= x"DDDDDDDD";  --iTHRESHOLD;   -- Def "DDDDDDDD"
   sIntBusy        <= x"0000C350";  --iINT_BUSY;    -- Def "0000C350"
-  sShaperTOn      <= x"005F5E10";  --iSHAPER_T_ON; -- Def "005F5E10"
+  sShaperTOn      <= x"00BEBC20";  --iSHAPER_T_ON; -- Def "005F5E10"
   sFreqDiv        <= x"C350";      --iFREQ_DIV;    -- Def "C350"  --> 1 Hz
   oTRIG           <= sTrig;
   sFreqDivRst     <= sRst or sFreqDivFlag; --iRST or sFreqDivFlag;
@@ -158,7 +158,19 @@ begin
   
   --!LED '0' (power on)
   sLed(0)           <= '1';
-  sLed(6 downto 1)  <= (others => '0');
+  sLed(6 downto 2)  <= (others => '0');
+  
+  --!LED '1' (reset)
+  reset_proc : process (iCLK)
+  begin
+    if (rising_edge(iCLK)) then
+      if (sRst = '1') then
+        sLed(1) <= '1';
+      else
+        sLed(1) <= '0';
+      end if;
+    end if;
+  end process;
   
   --!LED '7' (trigger)
   led_trig_proc : process (iCLK)
