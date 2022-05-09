@@ -57,7 +57,7 @@ architecture Behavior of top_randomTrigger is
   signal sFreqDivFlag    : std_logic;                       --!iFREQ_DIV[k] /= iFREQ_DIV[k-1]
   signal sFreqDivRst     : std_logic;                       --!Slow clock reset
   signal sLed            : std_logic_vector(7 downto 0);    --!Led signals
-  
+  signal sRst            : std_logic;                       --!Reset
   
 begin
   --!Combinatorial assignments
@@ -67,13 +67,14 @@ begin
   sShaperTOn      <= x"005F5E10";  --iSHAPER_T_ON; -- Def "005F5E10"
   sFreqDiv        <= x"C350";      --iFREQ_DIV;    -- Def "C350"  --> 1 Hz
   oTRIG           <= sTrig;
-  sFreqDivRst     <= iRST or sFreqDivFlag;
+  sFreqDivRst     <= sRst or sFreqDivFlag; --iRST or sFreqDivFlag;
   oLED            <= sLed;
+  sRst            <= iKEY(0);      --iRST
   
   pseudocasual_32bit_value : PRBS32
     port map(
       iCLK       => iCLK,
-      iRST       => iRST,
+      iRST       => sRst,
       iPRBS32_en => sSlowClock,
       oDATA      => sPRBS32Out
       );
@@ -100,7 +101,7 @@ begin
     if (rising_edge(iCLK)) then
     
       --!RESET
-      if (iRST = '1') then
+      if (sRst = '1') then
         sTrig <= '0';
         sShaperCounter <= (others => '0');
       
