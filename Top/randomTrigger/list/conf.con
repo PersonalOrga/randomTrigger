@@ -1,0 +1,3 @@
+constraints/randomTrigger.sdc
+constraints/randomTrigger_pins.qsf
+constraints/randomTrigger_properties.qsf

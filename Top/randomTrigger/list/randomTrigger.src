@@ -1,0 +1,22 @@
+#Top file: Hog searches for the top file with name format top_<project>.vhd
+logic/top_randomTrigger.vhd
+
+#Packages
+logic/basic_package.vhd
+logic/paperoPackage.vhd
+logic/FOOTpackage.vhd
+
+#Project-specific files
+logic/randomTrigger_tb.vhd
+
+#Basic functions
+logic/clock_divider_2.vhd
+logic/FFD.vhd
+logic/PRBS32.vhd
+
+#Qsys IPs: regenerate the IP for each new build
+#Add the qip if you want to generate it only once
+#Example: ip/soc_system/soc_system.qsys noadd --synthesis=VHDL
+
+#Other IPs
+#Example: ip/debounce/debounce.v
