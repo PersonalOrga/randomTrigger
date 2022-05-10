@@ -39,14 +39,14 @@ end randomTrigger;
 
 
 --!@copydoc top_randomTrigger.vhd
-architecture Behavior of top_randomTrigger is  
+architecture Behavior of randomTrigger is  
   signal sPRBS32Out      : std_logic_vector(31 downto 0);   --!PRBS32 output
   signal sBusyCounter    : std_logic_vector(31 downto 0);   --!Counter for trigger pause
   signal sShaperCounter  : std_logic_vector(31 downto 0);   --!Counter for shaper
   signal sTrig           : std_logic;                       --!Output trigger
   signal sSlowClock      : std_logic;                       --!Slow clock for PRBS32
-  signal sFreqDiv        : std_logic_vector(15 downto 0);   --!Slow clock duration
-  signal sFreqDivDelay   : std_logic_vector(15 downto 0);   --!Slow clock duration (1-CLK delay)
+  signal sFreqDiv        : std_logic_vector(31 downto 0);   --!Slow clock duration
+  signal sFreqDivDelay   : std_logic_vector(31 downto 0);   --!Slow clock duration (1-CLK delay)
   signal sFreqDivFlag    : std_logic;                       --!iFREQ_DIV[k] /= iFREQ_DIV[k-1]
   signal sFreqDivRst     : std_logic;                       --!Slow clock reset
   
@@ -91,13 +91,13 @@ begin
         sTrig <= '0';
         sShaperCounter <= (others => '0');
       
-      elsif (sEn = '1') then
+      elsif (iEN = '1') then
       --!default value
       sShaperCounter <= (others => '0');
       sBusyCounter   <= (others => '0');
         --!TRIGGER ON  
         if (sTrig = '1') then
-          if (sShaperCounter < sShaperTOn) then
+          if (sShaperCounter < iSHAPER_T_ON) then
             sTrig <= '1';
             sShaperCounter <= sShaperCounter + 1;
           else
@@ -107,9 +107,9 @@ begin
         
         --!TRIGGER OFF  
         elsif (sTrig = '0') then
-          if (sBusyCounter < sIntBusy and sBusyCounter > 0) then
+          if (sBusyCounter < iINT_BUSY and sBusyCounter > 0) then
             sBusyCounter <= sBusyCounter + 1;
-          elsif (sPRBS32Out > sThreshold and (sExt_Busy = '0')) then
+          elsif (sPRBS32Out > iTHRESHOLD and (iEXT_BUSY = '0')) then
             sTrig <= '1';
             sShaperCounter <= sShaperCounter + 1;
           end if;

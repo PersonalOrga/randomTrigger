@@ -1,29 +1,14 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use work.paperoPackage.all;
+use work.basic_package.all;
 
 
-entity trigTestUnit_tb is
-end trigTestUnit_tb;
+entity randomTrigger_tb is
+end randomTrigger_tb;
 
 
-architecture Behavior of trigTestUnit_tb is
-component trigTestUnit is
-  port(
-    iCLK            : in  std_logic;        --!Main clock
-    iRST            : in  std_logic;        --!Main reset
-    iEN             : in  std_logic;        --!Enable PRBS32 Unit
-    -- External Busy
-    iEXT_BUSY       : in std_logic;         --!Ignore trigger
-    -- Settings
-    iTHRESHOLD      : in std_logic_vector(31 downto 0);  --!Threshold to configure trigger rate (low threshold --> High trigger rate)
-    iINT_BUSY       : in std_logic_vector(31 downto 0);  --!Ignore trigger for "N" clock cycles
-    iSHAPER_T_ON    : in std_logic_vector(31 downto 0);  --!Length of the pulse trigger
-    iFREQ_DIV       : in std_logic_vector(15 downto 0);  --!Slow clock duration (in number of iCLK cycles) to drive PRBS32
-    -- Output
-    oTRIG           : out std_logic         --!Output trigger
-    );
-end component;
-
+architecture Behavior of randomTrigger_tb is
 signal sCLK           : std_logic := '0';
 signal sRST           : std_logic := '1';
 signal sEN            : std_logic := '0';
@@ -31,13 +16,13 @@ signal sEXT_BUSY      : std_logic := '0';
 signal sTHRESHOLD     : std_logic_vector(31 downto 0) := (others => '0');
 signal sINT_BUSY      : std_logic_vector(31 downto 0) := (others => '0');
 signal sSHAPER_T_ON   : std_logic_vector(31 downto 0) := (others => '0');
-signal sFREQ_DIV      : std_logic_vector(15 downto 0) := (others => '0');
+signal sFREQ_DIV      : std_logic_vector(31 downto 0) := (others => '0');
 signal sTRIG          : std_logic;
 signal sSLOW_CLOCK    : std_logic;
 constant clk_period	  : time := 20 ns;			-- Definizione della costante "clk_period" di tipo "tempo".
 
 begin
-  uut : trigTestUnit
+  uut : randomTrigger
   port map(
       iCLK            => sCLK,
       iRST            => sRST,
@@ -72,7 +57,7 @@ begin
     sTHRESHOLD      <= x"DDDDDDDD";
     sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000001";
-    sFREQ_DIV       <= x"000A";
+    sFREQ_DIV       <= x"0000000A";
 		
 		-------------------------------------------------- START 02 (RESET)
 		wait for 940 ns;
@@ -82,7 +67,7 @@ begin
     sTHRESHOLD    <= x"DDDDDDDD";
     sINT_BUSY     <= x"0000000A";
     sSHAPER_T_ON  <= x"00000001";
-    sFREQ_DIV     <= x"000A";
+    sFREQ_DIV     <= x"0000000A";
     wait for 60 ns;
 		sRST		      <= '0';
 		sEN		        <= '1';
@@ -90,7 +75,7 @@ begin
     sTHRESHOLD    <= x"DDDDDDDD";
     sINT_BUSY     <= x"0000000A";
     sSHAPER_T_ON  <= x"00000001";
-    sFREQ_DIV     <= x"000A";
+    sFREQ_DIV     <= x"0000000A";
     
     -------------------------------------------------- START 03 (ENABLE)
 		wait for 940 ns;
@@ -100,7 +85,7 @@ begin
     sTHRESHOLD    <= x"DDDDDDDD";
     sINT_BUSY     <= x"0000000A";
     sSHAPER_T_ON  <= x"00000001";
-    sFREQ_DIV     <= x"000A";
+    sFREQ_DIV     <= x"0000000A";
     wait for 240 ns;
 		sRST		      <= '0';
 		sEN		        <= '1';
@@ -108,7 +93,7 @@ begin
     sTHRESHOLD    <= x"DDDDDDDD";
     sINT_BUSY     <= x"0000000A";
     sSHAPER_T_ON  <= x"00000001";
-    sFREQ_DIV     <= x"000A";
+    sFREQ_DIV     <= x"0000000A";
     
     -------------------------------------------------- START 04 (THRESHOLD)
 		wait for 1000 ns;
@@ -118,7 +103,7 @@ begin
     sTHRESHOLD    <= x"AAAAAAAA";
     sINT_BUSY     <= x"0000000A";
     sSHAPER_T_ON  <= x"00000001";
-    sFREQ_DIV     <= x"000A";
+    sFREQ_DIV     <= x"0000000A";
     wait for 5000 ns;
 		sRST		      <= '0';
 		sEN		        <= '1';
@@ -126,7 +111,7 @@ begin
     sTHRESHOLD    <= x"DDDDDDDD";
     sINT_BUSY     <= x"0000000A";
     sSHAPER_T_ON  <= x"00000001";
-    sFREQ_DIV     <= x"000A";
+    sFREQ_DIV     <= x"0000000A";
     
     -------------------------------------------------- START 05 (BUSY_PERIOD)
 		wait for 1000 ns;
@@ -136,7 +121,7 @@ begin
     sTHRESHOLD      <= x"DDDDDDDD";
     sINT_BUSY       <= x"0000004F";
     sSHAPER_T_ON    <= x"00000001";
-    sFREQ_DIV       <= x"000A";
+    sFREQ_DIV       <= x"0000000A";
     wait for 15000 ns;
 		sRST		      <= '0';
 		sEN		        <= '1';
@@ -144,7 +129,7 @@ begin
     sTHRESHOLD    <= x"DDDDDDDD";
     sINT_BUSY     <= x"0000000A";
     sSHAPER_T_ON  <= x"00000001";
-    sFREQ_DIV     <= x"000A";
+    sFREQ_DIV     <= x"0000000A";
     
     -------------------------------------------------- START 06 (EXTERNAL BUSY)
     wait for 1000 ns;
@@ -154,7 +139,7 @@ begin
     sTHRESHOLD      <= x"77777777";
     sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000001";
-    sFREQ_DIV       <= x"000A";
+    sFREQ_DIV       <= x"0000000A";
     wait for 1000 ns;
     sRST		        <= '0';
 		sEN		          <= '1';
@@ -162,7 +147,7 @@ begin
     sTHRESHOLD      <= x"77777777";
     sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000001";
-    sFREQ_DIV       <= x"000A";
+    sFREQ_DIV       <= x"0000000A";
     wait for 5000 ns;
     sRST		        <= '0';
 		sEN		          <= '1';
@@ -170,7 +155,7 @@ begin
     sTHRESHOLD      <= x"77777777";
     sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000001";
-    sFREQ_DIV       <= x"000A";
+    sFREQ_DIV       <= x"0000000A";
     
     -------------------------------------------------- START 07 (SHAPER TIME ON)
     wait for 1000 ns;
@@ -180,7 +165,7 @@ begin
     sTHRESHOLD      <= x"77777777";
     sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000064";
-    sFREQ_DIV       <= x"000A";
+    sFREQ_DIV       <= x"0000000A";
     wait for 10000 ns;
 		sRST		        <= '0';
 		sEN		          <= '1';
@@ -188,7 +173,7 @@ begin
     sTHRESHOLD      <= x"77777777";
     sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000001";
-    sFREQ_DIV       <= x"000A";
+    sFREQ_DIV       <= x"0000000A";
     
     -------------------------------------------------- START 08 (SLOW CLOCK)
     wait for 1000 ns;
@@ -198,7 +183,7 @@ begin
     sTHRESHOLD      <= x"77777777";
     sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000001";
-    sFREQ_DIV       <= x"0002";
+    sFREQ_DIV       <= x"00000002";
     wait for 1000 ns;
 		sRST		        <= '0';
 		sEN		          <= '1';
@@ -206,7 +191,7 @@ begin
     sTHRESHOLD      <= x"77777777";
     sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000001";
-    sFREQ_DIV       <= x"000A";
+    sFREQ_DIV       <= x"0000000A";
     
     -------------------------------------------------- START 09 (f_trig = 500Hz)
     wait for 30 ns;
@@ -216,7 +201,7 @@ begin
     sTHRESHOLD      <= x"7FDA1A40";
     sINT_BUSY       <= x"0000C350";
     sSHAPER_T_ON    <= x"00000005";
-    sFREQ_DIV       <= x"C350";
+    sFREQ_DIV       <= x"0000C350";
     
     
     

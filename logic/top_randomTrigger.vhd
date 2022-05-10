@@ -40,7 +40,7 @@ architecture Behavior of top_randomTrigger is
   signal sThreshold      : std_logic_vector(31 downto 0);   --!Threshold to configure trigger rate
   signal sIntBusy        : std_logic_vector(31 downto 0);   --!Ignore trigger for "N" clock cycles after trigger
   signal sShaperTOn      : std_logic_vector(31 downto 0);   --!Length of the pulse trigger
-  signal sFreqDiv        : std_logic_vector(15 downto 0);   --!Slow clock duration
+  signal sFreqDiv        : std_logic_vector(31 downto 0);   --!Slow clock duration
   signal sTrig           : std_logic;                       --!Output trigger
   signal sTrigSync       : std_logic;                       --!Output trigger flip-flopped
   signal sSlowClock      : std_logic;                       --!Slow clock for PRBS32
