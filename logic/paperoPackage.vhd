@@ -524,8 +524,24 @@ package paperoPackage is
       iFASTDATA_AFULL : in  std_logic
       );
   end component;
-
-
+  
+  component top_randomTrigger is
+  port(
+    iCLK            : in  std_logic;        --!Main clock
+    iRST            : in  std_logic;        --!Main reset
+    iEN             : in  std_logic;        --!Enable PRBS32 Unit
+    -- External Busy
+    iEXT_BUSY       : in std_logic;         --!Ignore trigger
+    -- Settings
+    iTHRESHOLD      : in std_logic_vector(31 downto 0);  --!Threshold to configure trigger rate (low threshold --> High trigger rate)
+    iINT_BUSY       : in std_logic_vector(31 downto 0);  --!Ignore trigger for "N" clock cycles
+    iSHAPER_T_ON    : in std_logic_vector(31 downto 0);  --!Length of the pulse trigger
+    iFREQ_DIV       : in std_logic_vector(15 downto 0);  --!Slow clock duration (in number of iCLK cycles) to drive PRBS32
+    -- Output
+    oTRIG           : out std_logic;         --!Output trigger
+    oSLOW_CLOCK     : out std_logic          --!PRBS32 enable (or trigger with costant frequency)
+    );
+  end component;
 
 
   -- Functions -----------------------------------------------------------------

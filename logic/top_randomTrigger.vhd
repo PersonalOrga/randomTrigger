@@ -22,174 +22,80 @@ use work.basic_package.all;
 entity top_randomTrigger is
   port(
     iCLK            : in  std_logic;        --!Main clock
-    iRST            : in  std_logic;        --!Main reset
-    iEN             : in  std_logic;        --!Enable Comparison between iTHRESHOLD and pseudocasual 32-bit value
     -- Peripherals
     iKEY        : in    std_logic_vector(1 downto 0);   --!2 x Key
     iSW         : in    std_logic_vector(3 downto 0);   --!4 x Switch
     oLED        : out   std_logic_vector(7 downto 0);   --!8 x Led
-    -- External Busy
-    iEXT_BUSY       : in std_logic;         --!Ignore trigger
-    -- Settings
-    iTHRESHOLD      : in std_logic_vector(31 downto 0);  --!Threshold to configure trigger rate (low threshold --> High trigger rate)
-    iINT_BUSY       : in std_logic_vector(31 downto 0);  --!Ignore trigger for "N" clock cycles after trigger
-    iSHAPER_T_ON    : in std_logic_vector(31 downto 0);  --!Length of the pulse trigger
-    iFREQ_DIV       : in std_logic_vector(15 downto 0);  --!Slow clock duration (in number of iCLK cycles) to drive PRBS32
     -- Output
-    oTRIG           : out std_logic;         --!Output trigger
-    oSLOW_CLOCK     : out std_logic          --!Slow clock for PRBS32
+    oTRIG           : out std_logic;         --!Trigger
+    oSLOW_CLOCK     : out std_logic          --!PRBS32 enable
     );
 end top_randomTrigger;
 
 
 --!@copydoc top_randomTrigger.vhd
 architecture Behavior of top_randomTrigger is  
-  signal sPRBS32Out      : std_logic_vector(31 downto 0);   --!PRBS32 output
-  signal sBusyCounter    : std_logic_vector(31 downto 0);   --!Counter for trigger pause
-  signal sShaperCounter  : std_logic_vector(31 downto 0);   --!Counter for shaper
-  signal sExt_Busy       : std_logic;                       --!Ignore trigger
+  --!randomTrigger signals
+  signal sRst            : std_logic;                       --!Reset
   signal sThreshold      : std_logic_vector(31 downto 0);   --!Threshold to configure trigger rate
   signal sIntBusy        : std_logic_vector(31 downto 0);   --!Ignore trigger for "N" clock cycles after trigger
   signal sShaperTOn      : std_logic_vector(31 downto 0);   --!Length of the pulse trigger
-  signal sTrig           : std_logic;                       --!Output trigger
-  signal sSlowClock      : std_logic;                       --!Slow clock for PRBS32
   signal sFreqDiv        : std_logic_vector(15 downto 0);   --!Slow clock duration
-  signal sFreqDivDelay   : std_logic_vector(15 downto 0);   --!Slow clock duration (1-CLK delay)
-  signal sFreqDivFlag    : std_logic;                       --!iFREQ_DIV[k] /= iFREQ_DIV[k-1]
-  signal sFreqDivRst     : std_logic;                       --!Slow clock reset
-  signal sLed            : std_logic_vector(7 downto 0);    --!Led signals
-  signal sRst            : std_logic;                       --!Reset
-  signal sEn             : std_logic;                       --!Enable
-  signal sCounter        : std_logic_vector(25 downto 0) := (others => '0');
-  signal sClk            : std_logic;
+  signal sTrig           : std_logic;                       --!Output trigger
+  signal sTrigSync       : std_logic;                       --!Output trigger flip-flopped
+  signal sSlowClock      : std_logic;                       --!Slow clock for PRBS32
+  signal sSlowClockSync  : std_logic;                       --!Slow clock for PRBS32 flip-flopped
+  
+  --!peripherals signals
+  signal sLed            : std_logic_vector(7 downto 0);    --!LEDs
   
 begin
-  --!Combinatorial assignments
-  sExt_Busy       <= '0';          --iEXT_BUSY;    -- Def '0'
-  --sThreshold      <= x"7FDA1A40";  --iTHRESHOLD;   -- Def "7FDA1A40"
-  sIntBusy        <= x"0000FDB6";  --iINT_BUSY;    -- Def "00000000"
-  sShaperTOn      <= x"00000032";  --iSHAPER_T_ON; -- Def "00000032"
-  sFreqDiv        <= x"FDE8";      --iFREQ_DIV;    -- Def "C350"  --> 1 Hz
-  oTRIG           <= sTrig;
-  sFreqDivRst     <= sRst or sFreqDivFlag; --iRST or sFreqDivFlag;
-  oLED            <= sLed;
-  --sRst            <= iRST;
-  --sEn             <= iEN;
-  sClk            <= iCLK;
-  oSLOW_CLOCK     <= sSlowClock;
-  
-  pseudocasual_32bit_value : PRBS32
-    port map(
-      iCLK       => sClk,
-      iRST       => sRst,
-      iPRBS32_en => sSlowClock,
-      oDATA      => sPRBS32Out
-      );
-      
-  slow_clock : clock_divider_2
-	generic map(
-		pPOLARITY => '1',
-    pWIDTH    => 16
-		)
-	port map(
-		iCLK 					    => sClk,
-		iRST 					    => sFreqDivRst,
-		iEN 					    => '1',
-		oCLK_OUT 			    => open,
-		oCLK_OUT_RISING 	=> sSlowClock,
-		oCLK_OUT_FALLING 	=> open,
-    iFREQ_DIV         => iFREQ_DIV,
-    iDUTY_CYCLE       => x"0001"
-		);
-      
-  --!comparison between threshold and PRBS32 output
-  comp : process (sClk)
+  --!Trigger parameters
+  sIntBusy        <= x"017D7840";  --Def "0000C31E" --> 49,950
+  sShaperTOn      <= x"00000032";  --Def "00000032" --> 50
+  sFreqDiv        <= x"017D7840";  --Def "0000C350" --> 50,000  --> f_avarage_trigger = 1 kHz
+  -- sThreshold      <= x"7FDA1A40";  --Def "7FDA1A40" -->
+  threshold_level : process (iCLK)
   begin
-    if (rising_edge(sClk)) then
-    
-      --!RESET
-      if (sRst = '1') then
-        sTrig <= '0';
-        sShaperCounter <= (others => '0');
-      
-      elsif (sEn = '1') then
-      --!default value
-      sShaperCounter <= (others => '0');
-      sBusyCounter   <= (others => '0');
-        --!TRIGGER ON  
-        if (sTrig = '1') then
-          if (sShaperCounter < sShaperTOn) then
-            sTrig <= '1';
-            sShaperCounter <= sShaperCounter + 1;
-          else
-            sTrig <= '0';
-            sBusyCounter <= sBusyCounter + 1;
-          end if;
-        
-        --!TRIGGER OFF  
-        elsif (sTrig = '0') then
-          if (sBusyCounter < sIntBusy and sBusyCounter > 0) then
-            sBusyCounter <= sBusyCounter + 1;
-          elsif (sPRBS32Out > sThreshold and (sExt_Busy = '0')) then
-            sTrig <= '1';
-            sShaperCounter <= sShaperCounter + 1;
-          end if;
-      
-        --!TRIGGER 'X'
-        else
-          sTrig <= '0';
-        end if;
-      end if;
-    end if;
-  end process;
-    
-  --!delay iFREQ_DIV value
-  ffd : process (sClk)
-	begin
-		if rising_edge(sClk) then
-			sFreqDivDelay <= sFreqDiv;
-		end if;
-	end process;
-  
-  --!chek for iFREQ_DIV changes
-  FREQ_DIV_changes : process (sClk)
-  begin
-    if rising_edge(sClk) then
-      if (sFreqDiv /= sFreqDivDelay) then
-        sFreqDivFlag <= '1';
-      else
-        sFreqDivFlag <= '0';
-      end if;
-    end if;
-  end process;
-  
-  --!THRESHOLD VALUE
-  threshold_proc : process (sClk)
-  begin
-    if (rising_edge(sClk)) then
+    if (rising_edge(iCLK)) then
       if (iSW(0) = '1') then
-        sThreshold      <= x"3B9ACA00";   -- 20%
+        sThreshold      <= x"33333333";   -- 20%
       elsif (iSW(1) = '1') then
-        sThreshold      <= x"77359400";   -- 45%
+        sThreshold      <= x"66666666";   -- 40%
       elsif (iSW(2) = '1') then
-        sThreshold      <= x"B2D05E00";   -- 70%
+        sThreshold      <= x"99999999";   -- 60%
       elsif (iSW(3) = '1') then
-        sThreshold      <= x"EE6B2800";   -- 95%
+        sThreshold      <= x"CCCCCCCC";   -- 80%
       else
-        sThreshold      <= x"7FDA1A40";   -- 50%
+        sThreshold      <= x"80000000";   -- 50%
       end if;
     end if;
   end process;
   
+  Trigger_generator : randomTrigger
+  port map(
+      iCLK            => iCLK,
+      iRST            => sRst,
+      iEN             => '1',
+      iEXT_BUSY       => '0',
+      iTHRESHOLD      => sThreshold,
+      iINT_BUSY       => sIntBusy,
+      iSHAPER_T_ON    => sShaperTOn,
+      iFREQ_DIV       => sFreqDiv,
+      oTRIG           => sTrig,
+      oSLOW_CLOCK     => sSlowClock
+      );
 
-  --!LED '0' (power on)
+  --------------------  L E D  --------------------
+  oLED <= sLed;
+  --!Power on (LED '0')
   sLed(0)           <= '1';
-  sLed(6 downto 3)  <= (others => '0');
+  sLed(3 downto 2)  <= "00";
   
-  --!LED '1' (reset)
-  reset_proc : process (sClk)
+  --!Reset (LED '1')
+  reset_proc : process (iCLK)
   begin
-    if (rising_edge(sClk)) then
+    if (rising_edge(iCLK)) then
       if (iKEY(1) = '0') then
         sRst    <= '1';
         sLed(1) <= '1';
@@ -200,43 +106,58 @@ begin
     end if;
   end process;
   
-  --!LED '2' (enable)
-  enable_proc : process (sClk)
+  --!Costant trigger (LED '4', LED '5')
+  led_cst_trig_proc : process (iCLK)
   begin
-    if (rising_edge(sClk)) then
-      if (iKEY(0) = '1') then
-        sEn     <= '1';
-        sLed(2) <= '1';
-      else
-        sEn     <= '0';
-        sLed(2) <= '0';
+    if (rising_edge(iCLK)) then
+      if (sRst = '1') then
+        sLed(4)   <= '0';
+        sLed(5)   <= '0';
+      elsif (sSlowClockSync = '1') then
+        sLed(4)   <= not sLed(4);
+        sLed(5)   <= not sLed(5);
       end if;
     end if;
   end process;
   
-  --!LED '7' (trigger)
-  led_trig_proc : process (sClk)
+  --!Random trigger (LED '6', LED '7')
+  led_rnd_trig_proc : process (iCLK)
   begin
-    if (rising_edge(sClk)) then
+    if (rising_edge(iCLK)) then
       if (sTrig = '1') then
+        sLed(6)   <= '1';
         sLed(7)   <= '1';
       else
+        sLed(6)   <= '0';
         sLed(7)   <= '0';
       end if;
     end if;
   end process;
   
-  -- process (sClk)
-	-- begin
-		-- if rising_edge(sClk) then
-			-- if (iRST = '1') then
-				-- oQ <= '1';
-			-- elsif (iENABLE = '1') then
-				-- oQ <= iD;
-			-- end if;
-		-- end if;
-	-- end process;
+  --------------------  O U T P U  T  --------------------
+  oTRIG <= sTrigSync;
+  trigger_ffd : sync_stage
+    generic map (
+      pSTAGES => 2
+      )
+    port map (
+      iCLK  => iCLK,
+      iRST  => '0',
+      iD    => sTrig,
+      oQ    => sTrigSync
+      );
   
- 
+  oSLOW_CLOCK <= sSlowClockSync;
+  SlowClock_ffd : sync_stage
+    generic map (
+      pSTAGES => 2
+      )
+    port map (
+      iCLK  => iCLK,
+      iRST  => '0',
+      iD    => sSlowClock,
+      oQ    => sSlowClockSync
+      );
+  
  
 end Behavior;
