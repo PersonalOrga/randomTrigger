@@ -58,22 +58,27 @@ architecture Behavior of top_randomTrigger is
   signal sFreqDivRst     : std_logic;                       --!Slow clock reset
   signal sLed            : std_logic_vector(7 downto 0);    --!Led signals
   signal sRst            : std_logic;                       --!Reset
+  signal sEn             : std_logic;                       --!Enable
+  signal sCounter        : std_logic_vector(25 downto 0) := (others => '0');
+  signal sClk            : std_logic;
   
 begin
   --!Combinatorial assignments
   sExt_Busy       <= '0';          --iEXT_BUSY;    -- Def '0'
-  sThreshold      <= x"DDDDDDDD";  --iTHRESHOLD;   -- Def "DDDDDDDD"
-  sIntBusy        <= x"0000C350";  --iINT_BUSY;    -- Def "0000C350"
-  sShaperTOn      <= x"00BEBC20";  --iSHAPER_T_ON; -- Def "005F5E10"
+  --sThreshold      <= x"7FDA1A40";  --iTHRESHOLD;   -- Def "DDDDDDDD"
+  sIntBusy        <= x"00000000";  --iINT_BUSY;    -- Def "0000C350"
+  sShaperTOn      <= x"00000032";  --iSHAPER_T_ON; -- Def "005F5E10"
   sFreqDiv        <= x"C350";      --iFREQ_DIV;    -- Def "C350"  --> 1 Hz
   oTRIG           <= sTrig;
   sFreqDivRst     <= sRst or sFreqDivFlag; --iRST or sFreqDivFlag;
   oLED            <= sLed;
-  sRst            <= iKEY(0);      --iRST
+  --sRst            <= iRST;
+  --sEn             <= iEN;
+  sClk            <= iCLK;
   
   pseudocasual_32bit_value : PRBS32
     port map(
-      iCLK       => iCLK,
+      iCLK       => sClk,
       iRST       => sRst,
       iPRBS32_en => sSlowClock,
       oDATA      => sPRBS32Out
@@ -85,7 +90,7 @@ begin
     pWIDTH    => 16
 		)
 	port map(
-		iCLK 					    => iCLK,
+		iCLK 					    => sClk,
 		iRST 					    => sFreqDivRst,
 		iEN 					    => '1',
 		oCLK_OUT 			    => sSlowClock,
@@ -96,16 +101,16 @@ begin
 		);
       
   --!comparison between threshold and PRBS32 output
-  comp : process (iCLK)
+  comp : process (sClk)
   begin
-    if (rising_edge(iCLK)) then
+    if (rising_edge(sClk)) then
     
       --!RESET
       if (sRst = '1') then
         sTrig <= '0';
         sShaperCounter <= (others => '0');
       
-      elsif (iEN = '1') then
+      elsif (sEn = '1') then
       --!default value
       sShaperCounter <= (others => '0');
       sBusyCounter   <= (others => '0');
@@ -137,17 +142,17 @@ begin
   end process;
     
   --!delay iFREQ_DIV value
-  ffd : process (iCLK)
+  ffd : process (sClk)
 	begin
-		if rising_edge(iCLK) then
+		if rising_edge(sClk) then
 			sFreqDivDelay <= sFreqDiv;
 		end if;
 	end process;
   
   --!chek for iFREQ_DIV changes
-  FREQ_DIV_changes : process (iCLK)
+  FREQ_DIV_changes : process (sClk)
   begin
-    if rising_edge(iCLK) then
+    if rising_edge(sClk) then
       if (sFreqDiv /= sFreqDivDelay) then
         sFreqDivFlag <= '1';
       else
@@ -156,26 +161,62 @@ begin
     end if;
   end process;
   
+  --!THRESHOLD VALUE
+  threshold_proc : process (sClk)
+  begin
+    if (rising_edge(sClk)) then
+      if (iSW(0) = '1') then
+        sThreshold      <= x"3B9ACA00";   -- 25%
+      elsif (iSW(1) = '1') then
+        sThreshold      <= x"77359400";   -- 50%
+      elsif (iSW(2) = '1') then
+        sThreshold      <= x"B2D05E00";   -- 75%
+      elsif (iSW(3) = '1') then
+        sThreshold      <= x"EE6B2800";   -- 90%
+      else
+        sThreshold      <= x"7FDA1A40";   -- 50%
+      end if;
+    end if;
+  end process;
+  
+  
+
   --!LED '0' (power on)
   sLed(0)           <= '1';
-  sLed(6 downto 2)  <= (others => '0');
+  sLed(6 downto 3)  <= (others => '0');
   
   --!LED '1' (reset)
-  reset_proc : process (iCLK)
+  reset_proc : process (sClk)
   begin
-    if (rising_edge(iCLK)) then
-      if (sRst = '1') then
+    if (rising_edge(sClk)) then
+      if (iKEY(1) = '0') then
+        sRst    <= '1';
         sLed(1) <= '1';
       else
+        sRst    <= '0';
         sLed(1) <= '0';
       end if;
     end if;
   end process;
   
-  --!LED '7' (trigger)
-  led_trig_proc : process (iCLK)
+  --!LED '2' (enable)
+  enable_proc : process (sClk)
   begin
-    if (rising_edge(iCLK)) then
+    if (rising_edge(sClk)) then
+      if (iKEY(0) = '1') then
+        sEn     <= '1';
+        sLed(2) <= '1';
+      else
+        sEn     <= '0';
+        sLed(2) <= '0';
+      end if;
+    end if;
+  end process;
+  
+  --!LED '7' (trigger)
+  led_trig_proc : process (sClk)
+  begin
+    if (rising_edge(sClk)) then
       if (sTrig = '1') then
         sLed(7)   <= '1';
       else
