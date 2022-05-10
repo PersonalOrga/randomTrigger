@@ -36,7 +36,8 @@ entity top_randomTrigger is
     iSHAPER_T_ON    : in std_logic_vector(31 downto 0);  --!Length of the pulse trigger
     iFREQ_DIV       : in std_logic_vector(15 downto 0);  --!Slow clock duration (in number of iCLK cycles) to drive PRBS32
     -- Output
-    oTRIG           : out std_logic         --!Output trigger
+    oTRIG           : out std_logic;         --!Output trigger
+    oSLOW_CLOCK     : out std_logic          --!Slow clock for PRBS32
     );
 end top_randomTrigger;
 
@@ -65,16 +66,17 @@ architecture Behavior of top_randomTrigger is
 begin
   --!Combinatorial assignments
   sExt_Busy       <= '0';          --iEXT_BUSY;    -- Def '0'
-  --sThreshold      <= x"7FDA1A40";  --iTHRESHOLD;   -- Def "DDDDDDDD"
-  sIntBusy        <= x"00000000";  --iINT_BUSY;    -- Def "0000C350"
-  sShaperTOn      <= x"00000032";  --iSHAPER_T_ON; -- Def "005F5E10"
-  sFreqDiv        <= x"C350";      --iFREQ_DIV;    -- Def "C350"  --> 1 Hz
+  --sThreshold      <= x"7FDA1A40";  --iTHRESHOLD;   -- Def "7FDA1A40"
+  sIntBusy        <= x"0000FDB6";  --iINT_BUSY;    -- Def "00000000"
+  sShaperTOn      <= x"00000032";  --iSHAPER_T_ON; -- Def "00000032"
+  sFreqDiv        <= x"FDE8";      --iFREQ_DIV;    -- Def "C350"  --> 1 Hz
   oTRIG           <= sTrig;
   sFreqDivRst     <= sRst or sFreqDivFlag; --iRST or sFreqDivFlag;
   oLED            <= sLed;
   --sRst            <= iRST;
   --sEn             <= iEN;
   sClk            <= iCLK;
+  oSLOW_CLOCK     <= sSlowClock;
   
   pseudocasual_32bit_value : PRBS32
     port map(
@@ -93,8 +95,8 @@ begin
 		iCLK 					    => sClk,
 		iRST 					    => sFreqDivRst,
 		iEN 					    => '1',
-		oCLK_OUT 			    => sSlowClock,
-		oCLK_OUT_RISING 	=> open,
+		oCLK_OUT 			    => open,
+		oCLK_OUT_RISING 	=> sSlowClock,
 		oCLK_OUT_FALLING 	=> open,
     iFREQ_DIV         => iFREQ_DIV,
     iDUTY_CYCLE       => x"0001"
@@ -166,19 +168,18 @@ begin
   begin
     if (rising_edge(sClk)) then
       if (iSW(0) = '1') then
-        sThreshold      <= x"3B9ACA00";   -- 25%
+        sThreshold      <= x"3B9ACA00";   -- 20%
       elsif (iSW(1) = '1') then
-        sThreshold      <= x"77359400";   -- 50%
+        sThreshold      <= x"77359400";   -- 45%
       elsif (iSW(2) = '1') then
-        sThreshold      <= x"B2D05E00";   -- 75%
+        sThreshold      <= x"B2D05E00";   -- 70%
       elsif (iSW(3) = '1') then
-        sThreshold      <= x"EE6B2800";   -- 90%
+        sThreshold      <= x"EE6B2800";   -- 95%
       else
         sThreshold      <= x"7FDA1A40";   -- 50%
       end if;
     end if;
   end process;
-  
   
 
   --!LED '0' (power on)
@@ -224,6 +225,18 @@ begin
       end if;
     end if;
   end process;
+  
+  -- process (sClk)
+	-- begin
+		-- if rising_edge(sClk) then
+			-- if (iRST = '1') then
+				-- oQ <= '1';
+			-- elsif (iENABLE = '1') then
+				-- oQ <= iD;
+			-- end if;
+		-- end if;
+	-- end process;
+  
  
  
 end Behavior;

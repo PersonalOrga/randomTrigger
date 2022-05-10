@@ -24,7 +24,8 @@ component top_randomTrigger is
     iSHAPER_T_ON    : in std_logic_vector(31 downto 0);  --!Length of the pulse trigger
     iFREQ_DIV       : in std_logic_vector(15 downto 0);  --!Slow clock duration (in number of iCLK cycles) to drive PRBS32
     -- Output
-    oTRIG           : out std_logic         --!Output trigger
+    oTRIG           : out std_logic;         --!Output trigger
+    oSLOW_CLOCK     : out std_logic          --!Slow clock for PRBS32
     );
 end component;
 
@@ -40,6 +41,7 @@ signal sINT_BUSY      : std_logic_vector(31 downto 0) := (others => '0');
 signal sSHAPER_T_ON   : std_logic_vector(31 downto 0) := (others => '0');
 signal sFREQ_DIV      : std_logic_vector(15 downto 0) := (others => '0');
 signal sTRIG          : std_logic;
+signal sSlowClock     : std_logic;
 constant clk_period	  : time := 20 ns;			-- Definizione della costante "clk_period" di tipo "tempo".
 
 begin
@@ -56,7 +58,8 @@ begin
       iINT_BUSY       => sINT_BUSY,
       iSHAPER_T_ON    => sSHAPER_T_ON,
       iFREQ_DIV       => sFREQ_DIV,
-      oTRIG           => sTRIG
+      oTRIG           => sTRIG,
+      oSLOW_CLOCK     => sSlowClock
       );
   
   
@@ -76,6 +79,8 @@ begin
     wait for 30 ns;
 		sRST		        <= '0';
 		sEN		          <= '1';
+    sKEY            <= "10";
+    sSW             <= "0010";
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"DDDDDDDD";
     sINT_BUSY       <= x"0000000A";
@@ -86,6 +91,8 @@ begin
 		wait for 940 ns;
 		sRST		      <= '1';
 		sEN		        <= '1';
+    sKEY          <= "10";
+    sSW           <= "0010";
     sEXT_BUSY     <= '0';
     sTHRESHOLD    <= x"DDDDDDDD";
     sINT_BUSY     <= x"0000000A";
@@ -94,6 +101,8 @@ begin
     wait for 60 ns;
 		sRST		      <= '0';
 		sEN		        <= '1';
+    sKEY          <= "10";
+    sSW           <= "0010";
     sEXT_BUSY     <= '0';
     sTHRESHOLD    <= x"DDDDDDDD";
     sINT_BUSY     <= x"0000000A";
@@ -104,6 +113,8 @@ begin
 		wait for 940 ns;
 		sRST		      <= '0';
 		sEN		        <= '0';
+    sKEY          <= "10";
+    sSW           <= "0010";
     sEXT_BUSY     <= '0';
     sTHRESHOLD    <= x"DDDDDDDD";
     sINT_BUSY     <= x"0000000A";
@@ -112,6 +123,8 @@ begin
     wait for 240 ns;
 		sRST		      <= '0';
 		sEN		        <= '1';
+    sKEY          <= "10";
+    sSW           <= "0010";
     sEXT_BUSY     <= '0';
     sTHRESHOLD    <= x"DDDDDDDD";
     sINT_BUSY     <= x"0000000A";
@@ -122,6 +135,8 @@ begin
 		wait for 1000 ns;
 		sRST		      <= '0';
 		sEN		        <= '1';
+    sKEY          <= "10";
+    sSW           <= "0010";
     sEXT_BUSY     <= '0';
     sTHRESHOLD    <= x"AAAAAAAA";
     sINT_BUSY     <= x"0000000A";
@@ -130,6 +145,8 @@ begin
     wait for 5000 ns;
 		sRST		      <= '0';
 		sEN		        <= '1';
+    sKEY          <= "10";
+    sSW           <= "0010";
     sEXT_BUSY     <= '0';
     sTHRESHOLD    <= x"DDDDDDDD";
     sINT_BUSY     <= x"0000000A";
@@ -140,14 +157,18 @@ begin
 		wait for 1000 ns;
 		sRST		      <= '0';
 		sEN		        <= '1';
-    sEXT_BUSY       <= '0';
-    sTHRESHOLD      <= x"DDDDDDDD";
-    sINT_BUSY       <= x"0000004F";
-    sSHAPER_T_ON    <= x"00000001";
-    sFREQ_DIV       <= x"000A";
+    sKEY          <= "10";
+    sSW           <= "0010";
+    sEXT_BUSY     <= '0';
+    sTHRESHOLD    <= x"DDDDDDDD";
+    sINT_BUSY     <= x"0000004F";
+    sSHAPER_T_ON  <= x"00000001";
+    sFREQ_DIV     <= x"000A";
     wait for 15000 ns;
 		sRST		      <= '0';
 		sEN		        <= '1';
+    sKEY          <= "10";
+    sSW           <= "0010";
     sEXT_BUSY     <= '0';
     sTHRESHOLD    <= x"DDDDDDDD";
     sINT_BUSY     <= x"0000000A";
@@ -158,6 +179,8 @@ begin
     wait for 1000 ns;
 		sRST		        <= '0';
 		sEN		          <= '1';
+    sKEY            <= "10";
+    sSW             <= "0010";
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"77777777";
     sINT_BUSY       <= x"0000000A";
@@ -166,6 +189,8 @@ begin
     wait for 1000 ns;
     sRST		        <= '0';
 		sEN		          <= '1';
+    sKEY            <= "10";
+    sSW             <= "0010";
     sEXT_BUSY       <= '1';
     sTHRESHOLD      <= x"77777777";
     sINT_BUSY       <= x"0000000A";
@@ -174,6 +199,8 @@ begin
     wait for 5000 ns;
     sRST		        <= '0';
 		sEN		          <= '1';
+    sKEY            <= "10";
+    sSW             <= "0010";
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"77777777";
     sINT_BUSY       <= x"0000000A";
@@ -184,6 +211,8 @@ begin
     wait for 1000 ns;
 		sRST		        <= '0';
 		sEN		          <= '1';
+    sKEY            <= "10";
+    sSW             <= "0010";
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"77777777";
     sINT_BUSY       <= x"0000000A";
@@ -192,6 +221,8 @@ begin
     wait for 10000 ns;
 		sRST		        <= '0';
 		sEN		          <= '1';
+    sKEY            <= "10";
+    sSW             <= "0010";
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"77777777";
     sINT_BUSY       <= x"0000000A";
@@ -202,6 +233,8 @@ begin
     wait for 1000 ns;
 		sRST		        <= '0';
 		sEN		          <= '1';
+    sKEY            <= "10";
+    sSW             <= "0010";
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"77777777";
     sINT_BUSY       <= x"0000000A";
@@ -210,6 +243,8 @@ begin
     wait for 1000 ns;
 		sRST		        <= '0';
 		sEN		          <= '1';
+    sKEY            <= "10";
+    sSW             <= "0010";
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"77777777";
     sINT_BUSY       <= x"0000000A";
@@ -220,6 +255,8 @@ begin
     wait for 30 ns;
 		sRST		        <= '0';
 		sEN		          <= '1';
+    sKEY            <= "10";
+    sSW             <= "0010";
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"7FDA1A40";
     sINT_BUSY       <= x"0000C350";

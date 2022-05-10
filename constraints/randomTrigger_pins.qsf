@@ -19,9 +19,10 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to iCLK
 # GPIO 1
 #===============================================================================
 set_location_assignment PIN_AC24 -to oTRIG
-
+set_location_assignment PIN_AF28 -to oSLOW_CLOCK
 
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to oTRIG
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to oSLOW_CLOCK
 
 
 #===============================================================================
