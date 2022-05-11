@@ -51,7 +51,7 @@ architecture Behavior of top_randomTrigger is
   
 begin
   --!Trigger parameters
-  sIntBusy        <= x"0007A0EE";  --Def "0000C31E" --> 49,950
+  sIntBusy        <= x"01312530";  --Def "0000C31E" --> 49,950
   sShaperTOn      <= x"00000032";  --Def "00000032" --> 50
   sFreqDiv        <= x"0007A120";  --Def "0000C350" --> 50,000  --> f_avarage_trigger = 1 kHz
   -- sThreshold      <= x"7FDA1A40";  --Def "7FDA1A40"

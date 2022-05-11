@@ -349,7 +349,7 @@ R44
 R16
 R17
 Erandomtrigger_tb
-Z45 w1652256338
+Z45 w1652276145
 R28
 R2
 R18
@@ -359,7 +359,7 @@ R3
 R34
 R4
 R5
-!i122 49
+!i122 53
 R7
 Z46 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger_tb.vhd
 Z47 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger_tb.vhd
@@ -369,9 +369,9 @@ V1MRWP;L:j;T:AR]Xg]@a30
 !s100 @IBDI@Iz6g3ZEi[8VPaR_3
 R11
 32
-Z48 !s110 1652256346
+Z48 !s110 1652276192
 !i10b 1
-Z49 !s108 1652256345.000000
+Z49 !s108 1652276192.000000
 Z50 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger_tb.vhd|
 Z51 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger_tb.vhd|
 !i113 1
@@ -388,11 +388,11 @@ R34
 R4
 R5
 Z52 DEx4 work 16 randomtrigger_tb 0 22 1MRWP;L:j;T:AR]Xg]@a30
-!i122 49
+!i122 53
 l24
 Z53 L11 202
-VEV4=A@amGW?Rl5eQ:k<Ll1
-!s100 ^nMcz26f:SfdEQ>;z@=Zz0
+Vcl:RA0DBIRbng=R;oX2N13
+!s100 :?lEEc=Y::P_0EeJA<Qbb0
 R11
 32
 R48

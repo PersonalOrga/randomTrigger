@@ -54,13 +54,13 @@ begin
 		sRST		        <= '0';
 		sEN		          <= '1';
     sEXT_BUSY       <= '0';
-    sTHRESHOLD      <= x"80000000"; --"DDDDDDDD"
-    sINT_BUSY       <= x"00000007";
+    sTHRESHOLD      <= x"E6666666"; --"DDDDDDDD"
+    sINT_BUSY       <= x"00000080";
     sSHAPER_T_ON    <= x"00000003";
     sFREQ_DIV       <= x"0000000A";
 		
 		-------------------------------------------------- START 02 (RESET)
-		wait for 20940 ns;
+		wait for 20000940 ns;
 		sRST		      <= '1';
 		sEN		        <= '1';
     sEXT_BUSY     <= '0';
