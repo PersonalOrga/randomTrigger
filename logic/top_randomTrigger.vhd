@@ -51,21 +51,37 @@ architecture Behavior of top_randomTrigger is
   
 begin
   --!Trigger parameters
-  sIntBusy        <= x"0000C31E";  --Def "0000C31E" --> 49,950
+  sIntBusy        <= x"0007A0EE";  --Def "0000C31E" --> 49,950
   sShaperTOn      <= x"00000032";  --Def "00000032" --> 50
-  sFreqDiv        <= x"0000C350";  --Def "0000C350" --> 50,000  --> f_avarage_trigger = 1 kHz
+  sFreqDiv        <= x"0007A120";  --Def "0000C350" --> 50,000  --> f_avarage_trigger = 1 kHz
   -- sThreshold      <= x"7FDA1A40";  --Def "7FDA1A40"
   threshold_level : process (iCLK)
   begin
     if (rising_edge(iCLK)) then
-      if (iSW(0) = '1') then
+      if (iSW = 0) then
+        sThreshold      <= x"00000000";   -- 0%
+      elsif (iSW = 1) then
+        sThreshold      <= x"19999999";   -- 10%
+      elsif (iSW = 2) then
         sThreshold      <= x"33333333";   -- 20%
-      elsif (iSW(1) = '1') then
-        sThreshold      <= x"66666666";   -- 40%
-      elsif (iSW(2) = '1') then
-        sThreshold      <= x"99999999";   -- 60%
-      elsif (iSW(3) = '1') then
-        sThreshold      <= x"CCCCCCCC";   -- 80%
+      elsif (iSW = 3) then
+        sThreshold      <= x"4CCCCCCC";   -- 30%  
+      elsif (iSW = 4) then
+        sThreshold      <= x"66666666";   -- 40%  
+      elsif (iSW = 5) then
+        sThreshold      <= x"80000000";   -- 50%  
+      elsif (iSW = 6) then
+        sThreshold      <= x"99999999";   -- 60%  
+      elsif (iSW = 7) then
+        sThreshold      <= x"B3333333";   -- 70%  
+      elsif (iSW = 8) then
+        sThreshold      <= x"CCCCCCCC";   -- 80%  
+      elsif (iSW = 9) then
+        sThreshold      <= x"E6666666";   -- 90%
+      elsif (iSW = 10) then
+        sThreshold      <= x"FD70A3D1";   -- 99%
+      elsif (iSW = 11) then
+        sThreshold      <= x"FFFFFFFF";   -- 100% 
       else
         sThreshold      <= x"80000000";   -- 50%
       end if;
