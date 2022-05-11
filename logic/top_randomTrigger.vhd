@@ -41,6 +41,7 @@ architecture Behavior of top_randomTrigger is
   signal sIntBusy        : std_logic_vector(31 downto 0);   --!Ignore trigger for "N" clock cycles after trigger
   signal sShaperTOn      : std_logic_vector(31 downto 0);   --!Length of the pulse trigger
   signal sFreqDiv        : std_logic_vector(31 downto 0);   --!Slow clock duration
+  signal sIntTrig        : std_logic;
   signal sTrig           : std_logic;                       --!Output trigger
   signal sTrigSync       : std_logic;                       --!Output trigger flip-flopped
   signal sSlowClock      : std_logic;                       --!Slow clock for PRBS32
@@ -52,7 +53,7 @@ architecture Behavior of top_randomTrigger is
 begin
   --!Trigger parameters
   sIntBusy        <= x"0007A0EE";  --Def "0000C31E" --> 49,950
-  sShaperTOn      <= x"00000032";  --Def "00000032" --> 50
+  sShaperTOn      <= x"00000001";  --Def "00000032" --> 50
   sFreqDiv        <= x"0007A120";  --Def "0000C350" --> 50,000  --> f_avarage_trigger = 1 kHz
   -- sThreshold      <= x"7FDA1A40";  --Def "7FDA1A40"
   threshold_level : process (iCLK)
@@ -98,9 +99,24 @@ begin
       iINT_BUSY       => sIntBusy,
       iSHAPER_T_ON    => sShaperTOn,
       iFREQ_DIV       => sFreqDiv,
-      oTRIG           => sTrig,
+      oTRIG           => sIntTrig,
       oSLOW_CLOCK     => sSlowClock
       );
+  
+  trig_count : entity work.countGenerator
+  generic map(
+    pWIDTH    => 6,
+    pPOLARITY => '1',
+    pLENGTH   => 20
+  )
+  port map(
+    iCLK          => iCLK,
+    iRST          => sRst,
+    iCOUNT        => sIntTrig,
+    iOCCURRENCES  => "00" & x"5",
+    oPULSE        => sTrig,
+    oPULSE_FLAG   => open
+  );
 
   --------------------  L E D  --------------------
   oLED <= sLed;
