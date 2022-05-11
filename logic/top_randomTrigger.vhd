@@ -51,10 +51,10 @@ architecture Behavior of top_randomTrigger is
   
 begin
   --!Trigger parameters
-  sIntBusy        <= x"017D7840";  --Def "0000C31E" --> 49,950
+  sIntBusy        <= x"0000C31E";  --Def "0000C31E" --> 49,950
   sShaperTOn      <= x"00000032";  --Def "00000032" --> 50
-  sFreqDiv        <= x"017D7840";  --Def "0000C350" --> 50,000  --> f_avarage_trigger = 1 kHz
-  -- sThreshold      <= x"7FDA1A40";  --Def "7FDA1A40" -->
+  sFreqDiv        <= x"0000C350";  --Def "0000C350" --> 50,000  --> f_avarage_trigger = 1 kHz
+  -- sThreshold      <= x"7FDA1A40";  --Def "7FDA1A40"
   threshold_level : process (iCLK)
   begin
     if (rising_edge(iCLK)) then
