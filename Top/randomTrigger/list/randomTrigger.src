@@ -9,6 +9,7 @@ logic/FOOTpackage.vhd
 #Project-specific files
 logic/randomTrigger.vhd
 logic/randomTrigger_tb.vhd
+logic/countGenerator.vhd
 
 #Basic functions
 logic/clock_divider_2.vhd
