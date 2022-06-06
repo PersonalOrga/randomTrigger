@@ -52,9 +52,9 @@ architecture Behavior of top_randomTrigger is
   
 begin
   --!Trigger parameters
-  sIntBusy        <= x"0000000A";  --Def "0000C31E" --> 49,950
+  sIntBusy        <= x"00000008";  --Def "0000C31E" --> 49,950
   sShaperTOn      <= x"00000001";  --Def "00000032" --> 50
-  sFreqDiv        <= x"0007A120";  --Def "0000C350" --> 50,000  --> f_avarage_trigger = 1 kHz
+  sFreqDiv        <= x"0000000A";  --Def "0000C350" --> 50,000  --> f_avarage_trigger = 1 kHz
   -- sThreshold      <= x"7FDA1A40";  --Def "7FDA1A40"
   threshold_level : process (iCLK)
   begin
@@ -107,13 +107,13 @@ begin
   generic map(
     pWIDTH    => 8,
     pPOLARITY => '1',
-    pLENGTH   => 20
+    pLENGTH   => 1
   )
   port map(
     iCLK          => iCLK,
     iRST          => sRst,
     iCOUNT        => sIntTrig,
-    iOCCURRENCES  => x"01",
+    iOCCURRENCES  => x"03",
     oPULSE        => sTrig,
     oPULSE_FLAG   => open
   );

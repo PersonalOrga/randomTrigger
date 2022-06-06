@@ -51,6 +51,7 @@ architecture Behavior of randomTrigger is
   signal sEval        : std_logic;                     --!'1': Evaluate value wrt threshold
   signal sTriggered   : std_logic;  --!Internal trigger signal
   signal sTrig        : std_logic;  --!Decision wether to assert trigger
+  signal sTrigOut     : std_logic;  --!Output trigger
   
 begin
   --!Combinatorial assignments
@@ -86,7 +87,7 @@ begin
   begin
     RE_CLK_IF : if (rising_edge(iCLK)) then
       RST_IF : if (iRST = '1') then
-        oTRIG         <= '0';
+        sTrigOut      <= '0';
         sTrig         <= '0';
         sCountBusy <= '0';
         sBusyCounter <= (others => '1');
@@ -119,9 +120,9 @@ begin
 
         --Output Trigger
         if (sTrig = '1') then
-          oTRIG <= sSlowClock;
+          sTrigOut <= sSlowClock;
         else
-          oTRIG <= '0';
+          sTrigOut <= '0';
         end if;
 
       end if RST_IF;
@@ -137,6 +138,16 @@ begin
       sTriggered    <= sEval;
 		end if;
 	end process;
+  
+  trig_ris_edge : edge_detector
+  port map(
+    iCLK    => iCLK,
+    iRST    => iRST,
+    iD      => sTrigOut,
+    oQ      => open,
+    oEDGE_R => oTRIG,
+    oEDGE_F => open
+  );
   
  
 end Behavior;

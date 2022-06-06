@@ -1,27 +1,4 @@
-C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FFD.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FFD.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Loading package NUMERIC_STD
--- Compiling entity FFD
--- Compiling architecture Behavior of FFD
-
-} {} {}} C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FOOTpackage.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FOOTpackage.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Loading package MATH_REAL
--- Loading package basic_package
--- Compiling package FOOTpackage
-
-} {} {}} C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32.vhd
+C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -36,6 +13,29 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling entity PRBS32
 -- Compiling architecture Behavior of PRBS32
 
+} {} {}} C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FOOTpackage.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FOOTpackage.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package MATH_REAL
+-- Loading package basic_package
+-- Compiling package FOOTpackage
+
+} {} {}} C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FFD.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FFD.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package NUMERIC_STD
+-- Compiling entity FFD
+-- Compiling architecture Behavior of FFD
+
 } {} {}} C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/basic_package.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/basic_package.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
@@ -48,19 +48,6 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling package basic_package
 -- Compiling package body basic_package
 -- Loading package basic_package
-
-} {} {}} C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/clock_divider_2.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/clock_divider_2.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Loading package NUMERIC_STD
--- Loading package MATH_REAL
--- Loading package basic_package
--- Compiling entity clock_divider_2
--- Compiling architecture Behavioral of clock_divider_2
 
 } {} {}} C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/paperoPackage.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/paperoPackage.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
@@ -76,5 +63,18 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling package paperoPackage
 -- Compiling package body paperoPackage
 -- Loading package paperoPackage
+
+} {} {}} C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/clock_divider_2.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/clock_divider_2.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Loading package basic_package
+-- Compiling entity clock_divider_2
+-- Compiling architecture Behavioral of clock_divider_2
 
 } {} {}}
