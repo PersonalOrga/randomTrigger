@@ -13,28 +13,30 @@ signal sCLK           : std_logic := '0';
 signal sRST           : std_logic := '1';
 signal sEN            : std_logic := '0';
 signal sEXT_BUSY      : std_logic := '0';
-signal sTHRESHOLD     : std_logic_vector(31 downto 0) := (others => '0');
-signal sINT_BUSY      : std_logic_vector(31 downto 0) := (others => '0');
-signal sSHAPER_T_ON   : std_logic_vector(31 downto 0) := (others => '0');
+signal sTHRSH_LEVEL   : std_logic_vector(31 downto 0) := (others => '0');
+signal sPULSE_WIDTH   : std_logic_vector(31 downto 0) := (others => '0');
+signal sSHAPE_FACTOR  : std_logic_vector(31 downto 0) := (others => '0');
 signal sFREQ_DIV      : std_logic_vector(31 downto 0) := (others => '0');
+signal sDUTY_CYCLE    : std_logic_vector(31 downto 0) := (others => '0');
 signal sTRIG          : std_logic;
 signal sSLOW_CLOCK    : std_logic;
 constant clk_period	  : time := 20 ns;			-- Definizione della costante "clk_period" di tipo "tempo".
 
 begin
-  uut : randomTrigger
+  uut : top_randomTrigger
   port map(
-      iCLK            => sCLK,
-      iRST            => sRST,
-      iEN             => sEN,
-      iEXT_BUSY       => sEXT_BUSY,
-      iTHRESHOLD      => sTHRESHOLD,
-      iINT_BUSY       => sINT_BUSY,
-      iSHAPER_T_ON    => sSHAPER_T_ON,
-      iFREQ_DIV       => sFREQ_DIV,
-      oTRIG           => sTRIG,
-      oSLOW_CLOCK     => sSLOW_CLOCK
-      );
+    iCLK                => sCLK,
+    iRST                => sRST,
+    iEN                 => sEN,
+    iEXT_BUSY           => sEXT_BUSY,
+    iTHRSH_LEVEL        => sTHRSH_LEVEL,
+    iPULSE_WIDTH        => sPULSE_WIDTH,
+    iSHAPE_FACTOR       => sSHAPE_FACTOR,
+    iFREQ_DIV           => sFREQ_DIV,
+    iDUTY_CYCLE         => sDUTY_CYCLE,
+    oTRIG               => sTRIG,
+    oSLOW_CLOCK         => sSLOW_CLOCK
+    );
   
   
   -- Processo per la simulazione del segnale di clock

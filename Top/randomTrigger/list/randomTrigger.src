@@ -8,14 +8,17 @@ logic/FOOTpackage.vhd
 
 #Project-specific files
 logic/randomTrigger.vhd
-logic/randomTrigger_tb.vhd
+#logic/randomTrigger_tb.vhd
 logic/countGenerator.vhd
+logic/erlangRandomTrigger.vhd
 
 #Basic functions
 logic/clock_divider_2.vhd
 logic/FFD.vhd
 logic/PRBS32.vhd
+logic/PRBS32_sr.vhd
 logic/sync_stage.vhd
+logic/edge_detector.vhd
 
 #Qsys IPs: regenerate the IP for each new build
 #Add the qip if you want to generate it only once

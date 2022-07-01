@@ -1,7 +1,7 @@
 --!@file countGenerator.vhd
 --!@brief Generate a pulse after N occurrences
 --!
---!@details Generate a pulse after N occurrences, pLENGTH long;
+--!@details Generate a pulse after N occurrences, iLENGTH long;
 --!generate also the RISING and FALLING edges
 --!
 --!@author Mattia Barbanera, mattia.barbanera@infn.it
@@ -10,6 +10,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
 use IEEE.NUMERIC_STD.all;
+use work.basic_package.all;
 
 --!@copydoc countGenerator.vhd
 entity countGenerator is
@@ -17,9 +18,7 @@ entity countGenerator is
     --!Counter width
     pWIDTH    : natural := 32;
     --!Polarity of the pulse
-    pPOLARITY : std_logic := '1';
-    --!Length of the pulse
-    pLENGTH   : natural   := 1
+    pPOLARITY : std_logic := '1'
   );
   port(
     --!Main clock
@@ -30,6 +29,8 @@ entity countGenerator is
     iCOUNT        : in  std_logic;
     --!Number of occurences to count
     iOCCURRENCES  : in  std_logic_vector(pWIDTH-1 downto 0);
+    --!Length of the pulse
+    iLENGTH       : in std_logic_vector(pWIDTH-1 downto 0);
     --!Pulse
     oPULSE        : out std_logic;
     --!Output pulse flag (1 clock-cycle long)
@@ -92,7 +93,7 @@ begin
             sOutShaperCount <= sOutShaperCount + 1;
             sPulse <= pPOLARITY;
             oPULSE_FLAG <= not pPOLARITY;
-            if (sOutShaperCount > to_unsigned(pLENGTH, pWIDTH)-1) then
+            if (sOutShaperCount > unsigned(iLENGTH)-1) then
               sOccState <= WAIT_NEXT;
             end if;
 
@@ -122,7 +123,7 @@ begin
   --      if (sRstCnt = '1') then
   --        sOutShaperCount <= (others => '0');
   --        sPulse      <=  pPOLARITY;
-  --      elsif (sOutShaperCount < to_unsigned(pLENGTH, pWIDTH)-1) then
+  --      elsif (sOutShaperCount < to_unsigned(iLENGTH, pWIDTH)-1) then
   --        sOutShaperCount <= sOutShaperCount + 1;
   --      else
   --        sPulse      <=  not pPOLARITY;

@@ -1,11 +1,4 @@
 --!@file top_randomTrigger.vhd
---!@brief generate pulse trigger with pseudocasual delay
---!@details (iFREQ_DIV=iINT_BUSY hypothesys), f_avarage_trigger = (1/(SHAPER_T_ON*20*10^-9 + INT_BUSY*20*10^-9)) * ((2^32 - THRESHOLD)/2^32)
---!@setup 
---!         1) --> select SHAPER_T_ON
---!         2) --> select INT_BUSY
---!         3) --> put FREQ_DIV = INT_BUSY
---!         4) --> select THRESHOLD to get the desidered f_avarage_trigger
 --!@author Matteo D'Antonio, matteo.dantonio@pg.infn.it
 --!@date 09/05/2022
 
@@ -34,14 +27,12 @@ end top_randomTrigger;
 
 
 --!@copydoc top_randomTrigger.vhd
-architecture Behavior of top_randomTrigger is  
+architecture Behavior of top_randomTrigger is
   --!randomTrigger signals
   signal sRst            : std_logic;                       --!Reset
   signal sThreshold      : std_logic_vector(31 downto 0);   --!Threshold to configure trigger rate
-  signal sIntBusy        : std_logic_vector(31 downto 0);   --!Ignore trigger for "N" clock cycles after trigger
   signal sShaperTOn      : std_logic_vector(31 downto 0);   --!Length of the pulse trigger
   signal sFreqDiv        : std_logic_vector(31 downto 0);   --!Slow clock duration
-  signal sIntTrig        : std_logic;
   signal sTrig           : std_logic;                       --!Output trigger
   signal sTrigSync       : std_logic;                       --!Output trigger flip-flopped
   signal sSlowClock      : std_logic;                       --!Slow clock for PRBS32
@@ -49,12 +40,26 @@ architecture Behavior of top_randomTrigger is
   
   --!peripherals signals
   signal sLed            : std_logic_vector(7 downto 0);    --!LEDs
+
   
 begin
-  --!Trigger parameters
-  sIntBusy        <= x"00000008";  --Def "0000C31E" --> 49,950
-  sShaperTOn      <= x"00000001";  --Def "00000032" --> 50
-  sFreqDiv        <= x"0000000A";  --Def "0000C350" --> 50,000  --> f_avarage_trigger = 1 kHz
+  trig_gen : entity work.erlangRandomTrigger
+  port map(
+    iCLK                => iCLK,
+    iRST                => sRst,
+    iEN                 => '1',
+    iEXT_BUSY           => '0',
+    iTHRSH_LEVEL        => sThreshold,
+    iPULSE_WIDTH        => sShaperTOn,
+    iSHAPE_FACTOR       => x"00000001",
+    iFREQ_DIV           => sFreqDiv,
+    oTRIG               => sTrig,
+    oSLOW_CLOCK         => sSlowClock
+  );
+  
+    --!Trigger parameters
+  sShaperTOn      <= x"00000032";  --Def "00000032" --> 50
+  sFreqDiv        <= x"0007A120";  --Def "0000C350" --> 50,000  --> f_avarage_trigger = 1 kHz
   -- sThreshold      <= x"7FDA1A40";  --Def "7FDA1A40"
   threshold_level : process (iCLK)
   begin
@@ -80,8 +85,6 @@ begin
       elsif (iSW = 9) then
         sThreshold      <= x"E6666666";   -- 90%
       elsif (iSW = 10) then
-        sThreshold      <= x"FD70A3D1";   -- 99%
-      elsif (iSW = 11) then
         sThreshold      <= x"FFFFFFFF";   -- 100% 
       else
         sThreshold      <= x"80000000";   -- 50%
@@ -89,35 +92,6 @@ begin
     end if;
   end process;
   
-  Trigger_generator : randomTrigger
-  port map(
-      iCLK            => iCLK,
-      iRST            => sRst,
-      iEN             => '1',
-      iEXT_BUSY       => '0',
-      iTHRESHOLD      => sThreshold,
-      iINT_BUSY       => sIntBusy,
-      iSHAPER_T_ON    => sShaperTOn,
-      iFREQ_DIV       => sFreqDiv,
-      oTRIG           => sIntTrig,
-      oSLOW_CLOCK     => sSlowClock
-      );
-  
-  trig_count : entity work.countGenerator
-  generic map(
-    pWIDTH    => 8,
-    pPOLARITY => '1',
-    pLENGTH   => 1
-  )
-  port map(
-    iCLK          => iCLK,
-    iRST          => sRst,
-    iCOUNT        => sIntTrig,
-    iOCCURRENCES  => x"03",
-    oPULSE        => sTrig,
-    oPULSE_FLAG   => open
-  );
-
   --------------------  L E D  --------------------
   oLED <= sLed;
   --!Power on (LED '0')

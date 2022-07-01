@@ -1,5 +1,5 @@
---!@file top_randomTrigger.vhd
---!@brief generate pulse trigger with pseudocasual delay
+--!@file randomTrigger.vhd
+--!@brief generate pulse trigger with pseudorandom delay
 --!@details (iFREQ_DIV=iINT_BUSY hypothesys), f_avarage_trigger = (1/(SHAPER_T_ON*20*10^-9 + INT_BUSY*20*10^-9)) * ((2^32 - THRESHOLD)/2^32)
 --!@setup 
 --!         1) --> select SHAPER_T_ON
@@ -41,7 +41,6 @@ end randomTrigger;
 --!@copydoc top_randomTrigger.vhd
 architecture Behavior of randomTrigger is  
   signal sPRBS32Out   : std_logic_vector(31 downto 0); --!PRBS32 output
-  signal sCountBusy   : std_logic; --!'1': count busy, '0': wait
   signal sBusyCounter : unsigned(31 downto 0);         --!Counter for trigger pause
   signal sIntBusy     : std_logic;  --!Internal Busy
   signal sSlowClock   : std_logic;                     --!Slow clock for PRBS32
@@ -89,7 +88,6 @@ begin
       RST_IF : if (iRST = '1') then
         sTrigOut      <= '0';
         sTrig         <= '0';
-        sCountBusy <= '0';
         sBusyCounter <= (others => '1');
         sIntBusy <= '0';
       elsif (iEN = '1') then
