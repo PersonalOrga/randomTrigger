@@ -13,30 +13,27 @@ signal sCLK           : std_logic := '0';
 signal sRST           : std_logic := '1';
 signal sEN            : std_logic := '0';
 signal sEXT_BUSY      : std_logic := '0';
-signal sTHRSH_LEVEL   : std_logic_vector(31 downto 0) := (others => '0');
-signal sPULSE_WIDTH   : std_logic_vector(31 downto 0) := (others => '0');
-signal sSHAPE_FACTOR  : std_logic_vector(31 downto 0) := (others => '0');
+signal sTHRESHOLD   : std_logic_vector(31 downto 0) := (others => '0');
+signal sSHAPER_T_ON   : std_logic_vector(31 downto 0) := (others => '0');
 signal sFREQ_DIV      : std_logic_vector(31 downto 0) := (others => '0');
-signal sDUTY_CYCLE    : std_logic_vector(31 downto 0) := (others => '0');
 signal sTRIG          : std_logic;
 signal sSLOW_CLOCK    : std_logic;
 constant clk_period	  : time := 20 ns;			-- Definizione della costante "clk_period" di tipo "tempo".
 
 begin
-  uut : top_randomTrigger
+  uut : entity work.erlangRandomTrigger
   port map(
     iCLK                => sCLK,
     iRST                => sRST,
     iEN                 => sEN,
     iEXT_BUSY           => sEXT_BUSY,
-    iTHRSH_LEVEL        => sTHRSH_LEVEL,
-    iPULSE_WIDTH        => sPULSE_WIDTH,
-    iSHAPE_FACTOR       => sSHAPE_FACTOR,
+    iTHRSH_LEVEL        => sTHRESHOLD,
+    iPULSE_WIDTH        => sSHAPER_T_ON,
+    iSHAPE_FACTOR       => x"00000001",
     iFREQ_DIV           => sFREQ_DIV,
-    iDUTY_CYCLE         => sDUTY_CYCLE,
     oTRIG               => sTRIG,
     oSLOW_CLOCK         => sSLOW_CLOCK
-    );
+  );
   
   
   -- Processo per la simulazione del segnale di clock
@@ -57,8 +54,7 @@ begin
 		sEN		          <= '1';
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"80000000"; --"DDDDDDDD"
-    sINT_BUSY       <= x"00000007";
-    sSHAPER_T_ON    <= x"00000003";
+    sSHAPER_T_ON    <= x"00000002";
     sFREQ_DIV       <= x"0000000A";
 		
 		-------------------------------------------------- START 02 (RESET)
@@ -67,7 +63,6 @@ begin
 		sEN		        <= '1';
     sEXT_BUSY     <= '0';
     sTHRESHOLD    <= x"DDDDDDDD";
-    sINT_BUSY     <= x"0000000A";
     sSHAPER_T_ON  <= x"00000001";
     sFREQ_DIV     <= x"0000000A";
     wait for 60 ns;
@@ -75,7 +70,6 @@ begin
 		sEN		        <= '1';
     sEXT_BUSY     <= '0';
     sTHRESHOLD    <= x"DDDDDDDD";
-    sINT_BUSY     <= x"0000000A";
     sSHAPER_T_ON  <= x"00000001";
     sFREQ_DIV     <= x"0000000A";
     
@@ -85,7 +79,6 @@ begin
 		sEN		        <= '0';
     sEXT_BUSY     <= '0';
     sTHRESHOLD    <= x"DDDDDDDD";
-    sINT_BUSY     <= x"0000000A";
     sSHAPER_T_ON  <= x"00000001";
     sFREQ_DIV     <= x"0000000A";
     wait for 240 ns;
@@ -93,7 +86,6 @@ begin
 		sEN		        <= '1';
     sEXT_BUSY     <= '0';
     sTHRESHOLD    <= x"DDDDDDDD";
-    sINT_BUSY     <= x"0000000A";
     sSHAPER_T_ON  <= x"00000001";
     sFREQ_DIV     <= x"0000000A";
     
@@ -103,7 +95,6 @@ begin
 		sEN		        <= '1';
     sEXT_BUSY     <= '0';
     sTHRESHOLD    <= x"AAAAAAAA";
-    sINT_BUSY     <= x"0000000A";
     sSHAPER_T_ON  <= x"00000001";
     sFREQ_DIV     <= x"0000000A";
     wait for 5000 ns;
@@ -111,7 +102,6 @@ begin
 		sEN		        <= '1';
     sEXT_BUSY     <= '0';
     sTHRESHOLD    <= x"DDDDDDDD";
-    sINT_BUSY     <= x"0000000A";
     sSHAPER_T_ON  <= x"00000001";
     sFREQ_DIV     <= x"0000000A";
     
@@ -121,7 +111,6 @@ begin
 		sEN		        <= '1';
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"DDDDDDDD";
-    sINT_BUSY       <= x"0000004F";
     sSHAPER_T_ON    <= x"00000001";
     sFREQ_DIV       <= x"0000000A";
     wait for 15000 ns;
@@ -129,7 +118,6 @@ begin
 		sEN		        <= '1';
     sEXT_BUSY     <= '0';
     sTHRESHOLD    <= x"DDDDDDDD";
-    sINT_BUSY     <= x"0000000A";
     sSHAPER_T_ON  <= x"00000001";
     sFREQ_DIV     <= x"0000000A";
     
@@ -139,7 +127,6 @@ begin
 		sEN		          <= '1';
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"77777777";
-    sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000001";
     sFREQ_DIV       <= x"0000000A";
     wait for 1000 ns;
@@ -147,7 +134,6 @@ begin
 		sEN		          <= '1';
     sEXT_BUSY       <= '1';
     sTHRESHOLD      <= x"77777777";
-    sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000001";
     sFREQ_DIV       <= x"0000000A";
     wait for 5000 ns;
@@ -155,7 +141,6 @@ begin
 		sEN		          <= '1';
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"77777777";
-    sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000001";
     sFREQ_DIV       <= x"0000000A";
     
@@ -165,7 +150,6 @@ begin
 		sEN		          <= '1';
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"77777777";
-    sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000064";
     sFREQ_DIV       <= x"0000000A";
     wait for 10000 ns;
@@ -173,7 +157,6 @@ begin
 		sEN		          <= '1';
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"77777777";
-    sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000001";
     sFREQ_DIV       <= x"0000000A";
     
@@ -183,7 +166,6 @@ begin
 		sEN		          <= '1';
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"77777777";
-    sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000001";
     sFREQ_DIV       <= x"00000002";
     wait for 1000 ns;
@@ -191,7 +173,6 @@ begin
 		sEN		          <= '1';
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"77777777";
-    sINT_BUSY       <= x"0000000A";
     sSHAPER_T_ON    <= x"00000001";
     sFREQ_DIV       <= x"0000000A";
     
@@ -201,7 +182,6 @@ begin
 		sEN		          <= '1';
     sEXT_BUSY       <= '0';
     sTHRESHOLD      <= x"7FDA1A40";
-    sINT_BUSY       <= x"0000C350";
     sSHAPER_T_ON    <= x"00000005";
     sFREQ_DIV       <= x"0000C350";
     

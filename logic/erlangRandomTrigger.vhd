@@ -42,12 +42,14 @@ architecture Behavior of erlangRandomTrigger is
   signal sIntTrig        : std_logic;                       --!Comparison between threshold and pseudoradom value
   signal sTrig           : std_logic;                       --!Output trigger
   signal sSlowClock      : std_logic;                       --!Slow clock for PRBS32
+  signal sPulseWidth     : std_logic_vector(31 downto 0);   --!Length of the pulse -1
   
   
 begin
   --!Combinatorial assignment
   oTRIG           <= sTrig;
   oSLOW_CLOCK     <= sSlowClock;
+  sPulseWidth     <= iPULSE_WIDTH - 1;
   
   
   internal_trigger_generator : randomTrigger
@@ -74,7 +76,7 @@ begin
     iRST          => iRST,
     iCOUNT        => sIntTrig,
     iOCCURRENCES  => iSHAPE_FACTOR,
-    iLENGTH       => iPULSE_WIDTH,
+    iLENGTH       => sPulseWidth,
     oPULSE        => sTrig,
     oPULSE_FLAG   => open
   );
