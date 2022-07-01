@@ -37,6 +37,7 @@ architecture Behavior of top_randomTrigger is
   signal sTrigSync       : std_logic;                       --!Output trigger flip-flopped
   signal sSlowClock      : std_logic;                       --!Slow clock for PRBS32
   signal sSlowClockSync  : std_logic;                       --!Slow clock for PRBS32 flip-flopped
+  signal sIntBusy        : std_logic_vector(31 downto 0);   --!Internal busy
   
   --!peripherals signals
   signal sLed            : std_logic_vector(7 downto 0);    --!LEDs
@@ -50,6 +51,7 @@ begin
     iEN                 => '1',
     iEXT_BUSY           => '0',
     iTHRSH_LEVEL        => sThreshold,
+    iINT_BUSY           => sIntBusy,
     iPULSE_WIDTH        => sShaperTOn,
     iSHAPE_FACTOR       => x"00000001",
     iFREQ_DIV           => sFreqDiv,
@@ -58,9 +60,12 @@ begin
   );
   
     --!Trigger parameters
-  sShaperTOn      <= x"00000032";  --Def "00000032" --> 50
-  sFreqDiv        <= x"0007A120";  --Def "0000C350" --> 50,000  --> f_avarage_trigger = 1 kHz
-  -- sThreshold      <= x"7FDA1A40";  --Def "7FDA1A40"
+  sShaperTOn      <= int2slv(50, 32);       --1 us
+  sFreqDiv        <= int2slv(500000, 32);   --100 Hz
+  sIntBusy        <= int2slv(1, 32);        --20 ns
+  
+  
+  --sThreshold      <=  x"FFF97247";  --Def "7FDA1A40"
   threshold_level : process (iCLK)
   begin
     if (rising_edge(iCLK)) then

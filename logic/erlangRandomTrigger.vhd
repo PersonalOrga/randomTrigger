@@ -26,6 +26,7 @@ entity erlangRandomTrigger is
     -- Trigger Property    
     iTHRSH_LEVEL    : in std_logic_vector(31 downto 0);   --!Threshold to generate trigger by randomTrigger module [0 - 12]
     iPULSE_WIDTH    : in std_logic_vector(31 downto 0);   --!Length of the pulse (in number of iCLK cycles)
+    iINT_BUSY       : in std_logic_vector(31 downto 0);   --!Ignore trigger for "N" clock cycles after trigger
     iSHAPE_FACTOR   : in std_logic_vector(31 downto 0);   --!Statistic distribution: K=1 -> Exponential, K>7 -> Gaussian
     iFREQ_DIV       : in std_logic_vector(31 downto 0);   --!Period of periodic (in number of iCLK cycles) and comparison frequency for randomTrigger
     -- Output
@@ -59,7 +60,7 @@ begin
       iEN             => iEN,
       iEXT_BUSY       => iEXT_BUSY,
       iTHRESHOLD      => iTHRSH_LEVEL,
-      iINT_BUSY       => x"00000001",
+      iINT_BUSY       => iINT_BUSY,
       iSHAPER_T_ON    => iPULSE_WIDTH,
       iFREQ_DIV       => iFREQ_DIV,
       oTRIG           => sIntTrig,

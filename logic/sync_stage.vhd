@@ -28,8 +28,8 @@ architecture std of sync_stage is
     -- moved across combinational logic to improve performance.
     -- They must not be moved for the synchronization stages.
     --!@todo Will the attributes syn_allow_retiming work with altera FPGAs?
-    attribute syn_allow_retiming : boolean;
-    attribute syn_allow_retiming of pipeline: signal is false;
+    --attribute syn_allow_retiming : boolean;
+    --attribute syn_allow_retiming of pipeline: signal is false;
 
 begin
     oQ  <= pipeline(0);
