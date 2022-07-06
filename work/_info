@@ -16,7 +16,7 @@ Z2 DPx4 ieee 9 math_real 0 22 gNk<PdFJ<XNPcfef`f?Z81
 Z3 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
 Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z5 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-!i122 80
+!i122 124
 Z6 w1651766516
 Z7 dC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger
 Z8 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/basic_package.vhd
@@ -28,9 +28,9 @@ VCh4mcUEb5J:KdAdGDdd]i0
 Z11 OV;C;2020.1;71
 32
 b1
-Z12 !s110 1656663238
+Z12 !s110 1657034270
 !i10b 1
-Z13 !s108 1656663237.000000
+Z13 !s108 1657034270.000000
 Z14 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/basic_package.vhd|
 Z15 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/basic_package.vhd|
 !i113 1
@@ -44,7 +44,7 @@ R2
 R3
 R4
 R5
-!i122 80
+!i122 124
 l0
 L175 1
 V=K7SSWIJOm8<Wa2@Rjd1L2
@@ -68,7 +68,7 @@ R0
 R1
 R4
 R5
-!i122 81
+!i122 125
 R7
 Z19 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/clock_divider_2.vhd
 Z20 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/clock_divider_2.vhd
@@ -80,9 +80,9 @@ R11
 32
 R12
 !i10b 1
-Z22 !s108 1656663238.000000
-Z23 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/clock_divider_2.vhd|
-Z24 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/clock_divider_2.vhd|
+R13
+Z22 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/clock_divider_2.vhd|
+Z23 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/clock_divider_2.vhd|
 !i113 1
 R16
 R17
@@ -95,7 +95,7 @@ R1
 R4
 R5
 DEx4 work 15 clock_divider_2 0 22 c^HfHL^3<<aDm5EQQZnCD1
-!i122 81
+!i122 125
 l51
 L42 59
 VJZF;3F`i:_TKP2J<mXf1E0
@@ -104,14 +104,14 @@ R11
 32
 R12
 !i10b 1
+R13
 R22
 R23
-R24
 !i113 1
 R16
 R17
 Ecountgenerator
-Z25 w1656661349
+Z24 w1656661349
 R2
 R18
 R3
@@ -119,10 +119,10 @@ R0
 R1
 R4
 R5
-!i122 82
+!i122 126
 R7
-Z26 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/countGenerator.vhd
-Z27 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/countGenerator.vhd
+Z25 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/countGenerator.vhd
+Z26 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/countGenerator.vhd
 l0
 R21
 V0YPjG8LI:JS:Q]9h3Kbdo0
@@ -131,9 +131,9 @@ R11
 32
 R12
 !i10b 1
-R22
-Z28 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/countGenerator.vhd|
-Z29 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/countGenerator.vhd|
+R13
+Z27 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/countGenerator.vhd|
+Z28 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/countGenerator.vhd|
 !i113 1
 R16
 R17
@@ -145,8 +145,8 @@ R0
 R1
 R4
 R5
-Z30 DEx4 work 14 countgenerator 0 22 0YPjG8LI:JS:Q]9h3Kbdo0
-!i122 82
+Z29 DEx4 work 14 countgenerator 0 22 0YPjG8LI:JS:Q]9h3Kbdo0
+!i122 126
 l52
 L42 100
 VcMg:Hg:[Q9G0hk=NE_34J0
@@ -155,20 +155,20 @@ R11
 32
 R12
 !i10b 1
-R22
+R13
+R27
 R28
-R29
 !i113 1
 R16
 R17
 Eedge_detector
-Z31 w1656592896
+Z30 w1656592896
 R4
 R5
-!i122 83
+!i122 127
 R7
-Z32 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/edge_detector.vhd
-Z33 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/edge_detector.vhd
+Z31 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/edge_detector.vhd
+Z32 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/edge_detector.vhd
 l0
 R10
 V_4[Fi:?<4hb?_:Vi>7EnL2
@@ -177,9 +177,9 @@ R11
 32
 R12
 !i10b 1
-R22
-Z34 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/edge_detector.vhd|
-Z35 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/edge_detector.vhd|
+R13
+Z33 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/edge_detector.vhd|
+Z34 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/edge_detector.vhd|
 !i113 1
 R16
 R17
@@ -187,7 +187,7 @@ Astd
 R4
 R5
 DEx4 work 13 edge_detector 0 22 _4[Fi:?<4hb?_:Vi>7EnL2
-!i122 83
+!i122 127
 l29
 L27 20
 VdEf<>3Zf=1UMMzBDSnbhz1
@@ -196,65 +196,65 @@ R11
 32
 R12
 !i10b 1
-R22
+R13
+R33
 R34
-R35
 !i113 1
 R16
 R17
 Eerlangrandomtrigger
-Z36 w1656663275
-Z37 DPx4 work 11 footpackage 0 22 m3`[5kdhi=zU7N?NjPe6E2
+Z35 w1656679664
+Z36 DPx4 work 11 footpackage 0 22 m3`[5kdhi=zU7N?NjPe6E2
 R2
 R18
-Z38 DPx4 work 13 paperopackage 0 22 E<o_DziiBn709?HkZNQN:3
+Z37 DPx4 work 13 paperopackage 0 22 E<o_DziiBn709?HkZNQN:3
 R3
 R0
 R1
 R4
 R5
-!i122 93
+!i122 128
 R7
-Z39 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/erlangRandomTrigger.vhd
-Z40 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/erlangRandomTrigger.vhd
+Z38 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/erlangRandomTrigger.vhd
+Z39 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/erlangRandomTrigger.vhd
 l0
 L18 1
-VaUXD[dj;TVV;GQ98FWMR^0
-!s100 fai?>H[]kZ]iB0mkQZGH01
+Vg5F7>[gN3>MPMmnEZ1=VC0
+!s100 >`I^QoSY4z5@dGNJlOgn=3
 R11
 32
-Z41 !s110 1656663332
+R12
 !i10b 1
-Z42 !s108 1656663332.000000
-Z43 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/erlangRandomTrigger.vhd|
-Z44 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/erlangRandomTrigger.vhd|
+R13
+Z40 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/erlangRandomTrigger.vhd|
+Z41 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/erlangRandomTrigger.vhd|
 !i113 1
 R16
 R17
 Abehavior
-R30
-R37
+R29
+R36
 R2
 R18
-R38
+R37
 R3
 R0
 R1
 R4
 R5
-Z45 DEx4 work 19 erlangrandomtrigger 0 22 aUXD[dj;TVV;GQ98FWMR^0
-!i122 93
-l48
-L39 47
-VH9>B53h5_InD0hTkDjd2R2
-!s100 :4n4EFC3MLjbz9jADX?@n1
+Z42 DEx4 work 19 erlangrandomtrigger 0 22 g5F7>[gN3>MPMmnEZ1=VC0
+!i122 128
+l49
+L40 47
+VCcAJ:>ijmZA3LZKXBfW8o3
+!s100 GY2cP4mX_i@:>98L1gGdk3
 R11
 32
-R41
+R12
 !i10b 1
-R42
-R43
-R44
+R13
+R40
+R41
 !i113 1
 R16
 R17
@@ -265,10 +265,10 @@ R0
 R1
 R4
 R5
-!i122 85
+!i122 129
 R7
-Z46 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FFD.vhd
-Z47 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FFD.vhd
+Z43 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FFD.vhd
+Z44 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FFD.vhd
 l0
 R10
 VOY:h5l[WhGfB9E:c5IaGl3
@@ -277,9 +277,9 @@ R11
 32
 R12
 !i10b 1
-R22
-Z48 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FFD.vhd|
-Z49 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FFD.vhd|
+R13
+Z45 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FFD.vhd|
+Z46 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FFD.vhd|
 !i113 1
 R16
 R17
@@ -290,7 +290,7 @@ R1
 R4
 R5
 DEx4 work 3 ffd 0 22 OY:h5l[WhGfB9E:c5IaGl3
-!i122 85
+!i122 129
 l29
 L27 16
 VQQ9i?G`3Vnf;8U`LP3oM31
@@ -299,9 +299,9 @@ R11
 32
 R12
 !i10b 1
-R22
-R48
-R49
+R13
+R45
+R46
 !i113 1
 R16
 R17
@@ -313,7 +313,7 @@ R1
 R3
 R4
 R5
-!i122 86
+!i122 130
 R6
 R7
 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FOOTpackage.vhd
@@ -326,14 +326,14 @@ R11
 32
 R12
 !i10b 1
-R22
+R13
 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FOOTpackage.vhd|
 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/FOOTpackage.vhd|
 !i113 1
 R16
 R17
 Ppaperopackage
-R37
+R36
 R2
 R18
 R0
@@ -341,11 +341,11 @@ R1
 R3
 R4
 R5
-!i122 87
-Z50 w1652202007
+!i122 131
+Z47 w1652202007
 R7
-Z51 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/paperoPackage.vhd
-Z52 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/paperoPackage.vhd
+Z48 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/paperoPackage.vhd
+Z49 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/paperoPackage.vhd
 l0
 R10
 VE<o_DziiBn709?HkZNQN:3
@@ -355,15 +355,15 @@ R11
 b1
 R12
 !i10b 1
-R22
-Z53 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/paperoPackage.vhd|
-Z54 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/paperoPackage.vhd|
+R13
+Z50 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/paperoPackage.vhd|
+Z51 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/paperoPackage.vhd|
 !i113 1
 R16
 R17
 Bbody
-R38
 R37
+R36
 R2
 R18
 R0
@@ -371,7 +371,7 @@ R1
 R3
 R4
 R5
-!i122 87
+!i122 131
 l0
 L567 1
 V==[?hfTVbWRJ<?T11lC0@3
@@ -380,27 +380,27 @@ R11
 32
 R12
 !i10b 1
-R22
-R53
-R54
+R13
+R50
+R51
 !i113 1
 R16
 R17
 Eprbs32
 R6
-R37
+R36
 R2
 R18
-R38
+R37
 R3
 R0
 R1
 R4
 R5
-!i122 88
+!i122 132
 R7
-Z55 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32.vhd
-Z56 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32.vhd
+Z52 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32.vhd
+Z53 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32.vhd
 l0
 R21
 VGD6d6JemJC72o1D46YV1Y3
@@ -409,24 +409,24 @@ R11
 32
 R12
 !i10b 1
-R22
-Z57 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32.vhd|
-Z58 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32.vhd|
+R13
+Z54 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32.vhd|
+Z55 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32.vhd|
 !i113 1
 R16
 R17
 Abehavior
-R37
+R36
 R2
 R18
-R38
+R37
 R3
 R0
 R1
 R4
 R5
 DEx4 work 6 prbs32 0 22 GD6d6JemJC72o1D46YV1Y3
-!i122 88
+!i122 132
 l30
 L26 43
 VDoDOmH2iQ8_zQDg^i_JlB2
@@ -435,23 +435,23 @@ R11
 32
 R12
 !i10b 1
-R22
-R57
-R58
+R13
+R54
+R55
 !i113 1
 R16
 R17
 Eprbs32_sr
-Z59 w1653470164
+Z56 w1653470164
 R3
 R0
 R1
 R4
 R5
-!i122 89
+!i122 133
 R7
-Z60 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32_sr.vhd
-Z61 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32_sr.vhd
+Z57 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32_sr.vhd
+Z58 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32_sr.vhd
 l0
 L14 1
 VNf23><gCH02TcLolRG]Y^2
@@ -460,9 +460,9 @@ R11
 32
 R12
 !i10b 1
-R22
-Z62 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32_sr.vhd|
-Z63 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32_sr.vhd|
+R13
+Z59 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32_sr.vhd|
+Z60 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/PRBS32_sr.vhd|
 !i113 1
 R16
 R17
@@ -473,7 +473,7 @@ R1
 R4
 R5
 DEx4 work 9 prbs32_sr 0 22 Nf23><gCH02TcLolRG]Y^2
-!i122 89
+!i122 133
 l31
 L27 41
 V3AAHoohZTb]ZM6UjGfz2j0
@@ -482,79 +482,79 @@ R11
 32
 R12
 !i10b 1
-R22
-R62
-R63
+R13
+R59
+R60
 !i113 1
 R16
 R17
 Erandomtrigger
-Z64 w1656661019
-R37
+Z61 w1657035517
+R36
 R2
 R18
-R38
+R37
 R3
 R0
 R1
 R4
 R5
-!i122 90
+!i122 140
 R7
-Z65 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger.vhd
-Z66 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger.vhd
+Z62 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger.vhd
+Z63 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger.vhd
 l0
-Z67 L22 1
+Z64 L22 1
 VEzQ5`Mde>7@`GOn9bnjaK1
 !s100 ml_;4hX6C@bGKcAP^6DCI1
 R11
 32
-R12
+Z65 !s110 1657035524
 !i10b 1
-R22
-Z68 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger.vhd|
-Z69 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger.vhd|
+Z66 !s108 1657035524.000000
+Z67 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger.vhd|
+Z68 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger.vhd|
 !i113 1
 R16
 R17
 Abehavior
-R37
+R36
 R2
 R18
-R38
+R37
 R3
 R0
 R1
 R4
 R5
-DEx4 work 13 randomtrigger 0 22 EzQ5`Mde>7@`GOn9bnjaK1
-!i122 90
+Z69 DEx4 work 13 randomtrigger 0 22 EzQ5`Mde>7@`GOn9bnjaK1
+!i122 140
 l55
 L42 110
 VdAmDU]T^hoVnPnoXE[[Hg0
 !s100 88mb6kPg=2jVO9FdRz[Ud1
 R11
 32
-R12
+R65
 !i10b 1
-R22
+R66
+R67
 R68
-R69
 !i113 1
 R16
 R17
 Erandomtrigger_tb
-Z70 w1656663449
-R37
+Z70 w1657034246
+R36
 R2
 R18
 R0
 R1
 R3
-R38
+R37
 R4
 R5
-!i122 95
+!i122 135
 R7
 Z71 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger_tb.vhd
 Z72 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger_tb.vhd
@@ -564,31 +564,31 @@ V1MRWP;L:j;T:AR]Xg]@a30
 !s100 @IBDI@Iz6g3ZEi[8VPaR_3
 R11
 32
-Z73 !s110 1656663453
+Z73 !s110 1657034271
 !i10b 1
-Z74 !s108 1656663453.000000
+Z74 !s108 1657034271.000000
 Z75 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger_tb.vhd|
 Z76 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/randomTrigger_tb.vhd|
 !i113 1
 R16
 R17
 Abehavior
-R45
-R37
+R42
+R36
 R2
 R18
 R0
 R1
 R3
-R38
+R37
 R4
 R5
-Z77 DEx4 work 16 randomtrigger_tb 0 22 1MRWP;L:j;T:AR]Xg]@a30
-!i122 95
-l23
-Z78 L11 184
-V<XkJIT=]>?DOG_]C;IA>W3
-!s100 nImFWz29FVnHZCEokOLNX3
+DEx4 work 16 randomtrigger_tb 0 22 1MRWP;L:j;T:AR]Xg]@a30
+!i122 135
+l24
+L11 186
+VXm0Qgl7[WObEOPc8l_4ea0
+!s100 IhaE^[g4QoHmo96AlZB>72
 R11
 32
 R73
@@ -600,24 +600,24 @@ R76
 R16
 R17
 Esync_stage
-Z79 w1651766565
+Z77 w1656668481
 R4
 R5
-!i122 92
+!i122 136
 R7
-Z80 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/sync_stage.vhd
-Z81 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/sync_stage.vhd
+Z78 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/sync_stage.vhd
+Z79 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/sync_stage.vhd
 l0
 L12 1
 VAM805SF0C0idlgCSccm4F0
 !s100 SoDK6J4C[aDNTI[6U9^zI2
 R11
 32
-Z82 !s110 1656663239
+R73
 !i10b 1
-Z83 !s108 1656663239.000000
-Z84 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/sync_stage.vhd|
-Z85 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/sync_stage.vhd|
+R74
+Z80 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/sync_stage.vhd|
+Z81 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/sync_stage.vhd|
 !i113 1
 R16
 R17
@@ -625,27 +625,27 @@ Astd
 R4
 R5
 DEx4 work 10 sync_stage 0 22 AM805SF0C0idlgCSccm4F0
-!i122 92
+!i122 136
 l34
 L24 24
-Vb44YjMSTLVN:CMCbH_:W12
-!s100 A0j[DVB:V3Na]H>aW2D_V3
+V[E1X7_a]N^<imAF6L=g4@3
+!s100 Jz9=EE]1Q;F9X<1Wl0>zd1
 R11
 32
-R82
+R73
 !i10b 1
-R83
-R84
-R85
+R74
+R80
+R81
 !i113 1
 R16
 R17
 Etop_randomtrigger
-Z86 w1652201806
-R37
+Z82 w1652201806
+R36
 R2
 R18
-R38
+R37
 R3
 R0
 R1
@@ -653,27 +653,27 @@ R4
 R5
 !i122 26
 R7
-Z87 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/top_randomTrigger.vhd
-Z88 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/top_randomTrigger.vhd
+Z83 8C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/top_randomTrigger.vhd
+Z84 FC:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/top_randomTrigger.vhd
 l0
-R67
+R64
 V]fkjj]Si?FeZ0nDQ[<K1Q1
 !s100 4`;`nXc0d?;oXkj`Gf]M53
 R11
 32
-Z89 !s110 1652252899
+Z85 !s110 1652252899
 !i10b 1
-Z90 !s108 1652252899.000000
-Z91 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/top_randomTrigger.vhd|
-Z92 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/top_randomTrigger.vhd|
+Z86 !s108 1652252899.000000
+Z87 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/top_randomTrigger.vhd|
+Z88 !s107 C:/Users/lab-semiconduttori/MatteoDAntonio/FPGA_projects/Borsa_21_22/randomTrigger/logic/top_randomTrigger.vhd|
 !i113 1
 R16
 R17
 Abehavior
-R37
+R36
 R2
 R18
-R38
+R37
 R3
 R0
 R1
@@ -687,11 +687,11 @@ VBem1I<YbDndd30D?^gd6H2
 !s100 ;mPIlzRlaV?oPW4XGKHF]2
 R11
 32
-R89
+R85
 !i10b 1
-R90
-R91
-R92
+R86
+R87
+R88
 !i113 1
 R16
 R17

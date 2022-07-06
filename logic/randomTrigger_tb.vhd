@@ -13,8 +13,9 @@ signal sCLK           : std_logic := '0';
 signal sRST           : std_logic := '1';
 signal sEN            : std_logic := '0';
 signal sEXT_BUSY      : std_logic := '0';
-signal sTHRESHOLD   : std_logic_vector(31 downto 0) := (others => '0');
+signal sTHRESHOLD     : std_logic_vector(31 downto 0) := (others => '0');
 signal sSHAPER_T_ON   : std_logic_vector(31 downto 0) := (others => '0');
+signal sIntBusy       : std_logic_vector(31 downto 0) := (others => '0');
 signal sFREQ_DIV      : std_logic_vector(31 downto 0) := (others => '0');
 signal sTRIG          : std_logic;
 signal sSLOW_CLOCK    : std_logic;
@@ -29,6 +30,7 @@ begin
     iEXT_BUSY           => sEXT_BUSY,
     iTHRSH_LEVEL        => sTHRESHOLD,
     iPULSE_WIDTH        => sSHAPER_T_ON,
+    iINT_BUSY           => x"00000001",
     iSHAPE_FACTOR       => x"00000001",
     iFREQ_DIV           => sFREQ_DIV,
     oTRIG               => sTRIG,
